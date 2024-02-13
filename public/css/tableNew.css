@@ -1,0 +1,35 @@
+
+table {
+    width: 100%;
+    border: none;
+    font-size: 14px;
+}
+tr {
+    margin-bottom: 5px;
+}
+th, td {
+    text-align: left;
+    padding: 8px;
+    
+}
+h5 {
+    color: #fff;
+    background-color: #252525e8;
+    max-width: 100%;
+    padding: 10px;
+}
+.button {
+    background-color: #3F51B5;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    align-items: center;
+    justify-content: center;
+  }
+  
+.button:hover {
+    background-color: #2F408B;
+  }

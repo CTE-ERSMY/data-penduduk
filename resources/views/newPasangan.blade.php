@@ -1,58 +1,29 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('css/tableNew.css')}}">
-    <link rel="stylesheet" href="{{asset('css/navi2.css')}}">
-    <title>Maklumat Pasangan</title>
-</head>
-<body>
-    <div class="navigation-bar">
-        <a href="{{route('index')}}"class="tab laman">Laman Utama<br>(batal)</a>
-        <a class="tab done">Pemohon</a>
-        <a class="tab active">Pasangan</a>
-        <a class="tab">Pendapatan</a>
-        <a class="tab">Perbelanjaan</a>
-        <a class="tab">Tanggungan dan Waris</a>
-        <a class="tab">Harta</a>
-        <a class="tab">Bantuan</a>
-        <a class="tab">Had Kifayah</a>
-        <a class="tab">Lampiran Dokumen</a>
-        <a class="tab">Rumusan Siasatan</a>
-        <a class="tab">Sejarah Bantuan</a>
-    </div>
-    <div class="container">
+@include('header3')
     <h5>MAKLUMAT PASANGAN</h5>
         <form action="{{ route('newPasangan.new')}}" method="POST">
             @csrf
-            @if(isset($pemohonId))
+             @if(isset($pemohonId))
             <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
             @endif
-            <table>
+            <table class="table table-border">
             <tbody>
                 <tr>
                     <th>Nama Pemohon</th>
-                    <th>:</th>
-                    <td><input type="text" name="nama" placeholder="Nama Penuh" size="50" required></td>
+                    <td><input type="text" name="nama" placeholder="Nama Penuh" class="form-control" required></td>
                     <th>No. Kad Pengenalan</th>
-                    <th>:</th>
-                    <td><input type="text" name="ic" placeholder="12345601XXXX" maxlength="12" required></td>
+                    <td><input type="text" name="ic" placeholder="12345601XXXX" class="form-control" maxlength="12" required></td>
                 </tr><tr>
                     <th>Jantina</th>
-                    <th>:</th>
-                    <td><select name="jantina" id="jantina" required>
+                    <td><select name="jantina" id="jantina" class="form-control" required>
                             <option selected disabled>Pilih Jantina</option>
                             <option value="Lelaki">Lelaki</option>
                             <option value="Wanita">Wanita</option>
                         </select></td>
                     <th>Tarikh Lahir</th>
-                    <th>:</th>
-                    <td><input type="date" name="tarikh_lahir" id="tarikh_lahir" required></td>
+                    <td><input type="date" name="tarikh_lahir" id="tarikh_lahir" class="form-control" required></td>
                 </tr><tr>
                     <th>Status Perkahwinan</th>
-                    <th>:</th>
-                    <td><select name="status" id="status" required>
+                    <td><select name="status" id="status" class="form-control" required>
                             <option selected disabled>Pilih status</option>
                             <option value="Kahwin">Kahwin</option>
                             <option value="Bujang">Bujang</option>    
@@ -62,23 +33,20 @@
                             <option value="Janda(Bercerai)">Janda (Bercerai)</option>
                     </select></td>
                     <th>Keadaan Mental</th>
-                    <th>:</th>
-                    <td><select name="mental" id="mental" required>
+                    <td><select name="mental" id="mental" class="form-control" required>
                             <option selected disabled>Sila Pilih</option>
                             <option value="Waras">Waras</option>
                             <option value="Tidak Waras">Tidak Waras</option>
                         </select></td>
                 </tr><tr>
                     <th>Penghayatan Islam</th>
-                    <th>:</th>
-                    <td><select name="islam" id="islam" required>
+                    <td><select name="islam" id="islam" class="form-control" required>
                             <option selected disabled>Sila Pilih</option>
                             <option value="Baik">Baik</option>
                             <option value="Kurang Baik">Kurang Baik</option>
                         </select></td>
                     <th>Keadaan Fizikal</th>
-                    <th>:</th>
-                    <td><select name="fizikal" id="fizikal" required>
+                    <td><select name="fizikal" id="fizikal" class="form-control" required>
                         <option selected disabled>Sila Pilih</option>
                             <option value="Sihat">Sihat</option>
                             <option value="Sakit">Sakit</option>
@@ -86,26 +54,23 @@
                         </select></td>
                 </tr><tr>
                     <th rowspan="2">Alamat</th>
-                    <th rowspan="2">:</th>
                     <td rowspan="2">
-                        <input type="text" name="alamat" placeholder="lot 1234, jalan xxxxxx, Felda Sg Mas" size="50" required><br>
-                        <select name="poskod" id="poskod">
-                            <option selected value="81900" required>81900</option>
+                        <input type="text" name="alamat" class="form-control" placeholder="lot 1234, jalan xxxxxx, Felda Sg Mas" size="50" required><br>
+                        <select name="poskod" class="form-control" id="poskod">
+                            <option selected value="81900" class="form-control" required>81900</option>
                         </select><br>
-                        <select name="bandar" id="bandar">
+                        <select name="bandar" class="form-control" id="bandar">
                             <option selected value="Kota Tinggi">Kota Tinggi</option>
                         </select>
                     </td>
                     <th>No. Telefon Rumah</th>
-                    <th>:</th>
-                    <td><input type="text" name="nombor_rumah" id="nombor_rumah" placeholder="tiada(-), 0XXXXXXXX"></td>
+                    <td><input type="text" name="nombor_rumah" class="form-control" id="nombor_rumah" placeholder="tiada(-), 0XXXXXXXX"></td>
                 </tr><tr>
                     <th>No. Telefon Bimbit</th>
-                    <th>:</th>
-                    <td><input type="text" name="nombor_bimbit" id="nombor_bimbit" placeholder="tiada(-), 01XXXXXXXXX" required></td>
+                    <td><input type="text" name="nombor_bimbit" class="form-control" id="nombor_bimbit" placeholder="tiada(-), 01XXXXXXXXX" required></td>
                 </tr>
                 <tr>
-                    <th colspan="6"><center><input type="submit" class="button" value="Seterusnya"></center></th>    
+                    <th colspan="6"><center><input type="submit" class="btn btn-success" value="Seterusnya"></center></th>    
                 </tr>    
             </tbody>    
         </table>
@@ -118,4 +83,3 @@
         </div>
     </div>
 </body>
-</html>

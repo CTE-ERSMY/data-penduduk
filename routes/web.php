@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EditController;
 use App\Http\Controllers\InputController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\SubmitController;
 use App\Http\Controllers\DisplayController;
 
 /*
@@ -32,10 +33,15 @@ Route::get('/perbelanjaanView', [InputController::class, 'perbelanjaanView'])->n
 Route::post('/perbelanjaanNew', [InputController::class, 'perbelanjaanNew'])->name('perbelanjaan.new');
 Route::get('/warisView', [InputController::class, 'warisView'])->name('newWaris.view');
 Route::post('/warisNew', [InputController::class, 'warisNew'])->name('newWaris.new');
+Route::get('/hartaView', [InputController::class, 'hartaView'])->name('newHarta.view');
+Route::post('/hartaNew', [InputController::class, 'hartaNew'])->name('newHarta.new');
+Route::get('/hadTanggunganView', [InputController::class, 'hadTanggunganView'])->name('hadTanggungan.view');
+Route::post('/hadTanggunganNew', [InputController::class, 'hadTanggunganNew'])->name('hadTanggungan.new');
 Route::get('/pemohonDisplay', [DisplayController::class, 'pemohonDisplay'])->name('pemohon.display');
 Route::get('/pemohonDetails/{id}', [DisplayController::class, 'pemohonDetails'])->name('pemohon.details');
 Route::get('/kewanganDetails/{id}', [DisplayController::class, 'kewanganDetails'])->name('kewangan.details');
 Route::get('/warisDetails/{id}', [DisplayController::class, 'warisDetails'])->name('waris.details');
+Route::get('/hartaDetails/{id}', [DisplayController::class, 'hartaDetails'])->name('harta.details');
 Route::delete('/pemohonDelete/{id}', [EditController::class, 'pemohonDelete'])->name('pemohon.delete');
 Route::get('/pemohonEView{id}', [EditController::class, 'pemohonEView'])->name('pemohon.Eview');
 Route::post('/pemohonEdit{id}', [EditController::class, 'pemohonEdit'])->name('pemohon.edit');
@@ -47,3 +53,5 @@ Route::get('/perbelanjaanEview{id}', [EditController::class, 'perbelanjaanEview'
 Route::post('/perbelanjaanEdit{id}', [EditController::class, 'perbelanjaanEdit'])->name('perbelanjaan.edit');
 Route::get('/warisEview{id}', [EditController::class, 'warisEview'])->name('waris.Eview');
 Route::put('/warisEdit{id}', [EditController::class, 'warisEdit'])->name('waris.edit');
+Route::get('/hartaEview{id}', [EditController::class, 'hartaEview'])->name('harta.Eview');
+Route::post('/hartaEdit{id}', [EditController::class, 'hartaEdit'])->name('harta.edit');

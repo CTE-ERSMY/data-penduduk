@@ -1,70 +1,24 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanggungan Dan Waris</title>
-</head>
-<link rel="stylesheet" href="{{asset('css/tableNew.css')}}">
-<link rel="stylesheet" href="{{asset('css/navi2.css')}}">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.14/angular.min.js"></script>
-
-<style>
-    .pointer{
-  cursor:pointer;
-}
-
-#right{
-  float:right;
-}
-</style>
-<body>
-  <div class="navigation-bar">
-    <a href="{{route('index')}}"class="tab laman">Laman Utama<br>(batal)</a>
-    <a class="tab done">Pemohon</a>
-    <a class="tab done">Pasangan</a>
-    <a class="tab done">Pendapatan</a>
-    <a class="tab done">Perbelanjaan</a>
-    <a class="tab active">Tanggungan dan Waris</a>
-    <a class="tab">Harta</a>
-    <a class="tab">Bantuan</a>
-    <a class="tab">Had Kifayah</a>
-    <a class="tab">Lampiran Dokumen</a>
-    <a class="tab">Rumusan Siasatan</a>
-    <a class="tab">Sejarah Bantuan</a>
-</div>
-    <div ng-app="prongbang">
-        <div ng-controller="calcPriceController" class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <h5 style="color: white">Tanggungan dan Waris</h5>
+@include('header3')
+              <h5>Tanggungan dan Waris</h5>
               <br>
               <form ng-submit="submitData()" method="POST" action="{{ route('newWaris.new')}}">
                 @csrf
                 @if(isset($pemohonId))
         <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
-        @endif
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <th style="size:5px;">#</th>
+        @endif  
+                <table class="table table-border">
+                  <tr>
                       <th>Nama</th>
+                      <td><input ng-model="product.name" type="text" name="nama" class="form-control" required/></td>
+                    </tr><tr>
                       <th>No. Kad Pengenalan</th>
+                      <td><input ng-model="product.ic" type="text" name="ic" class="form-control" maxlength="12" required></td>
+                    </tr><tr>
                       <th>Umur</th>
+                      <td><input ng-model="product.umur" type="number" name="umur" class="form-control" min="0" required></td>
+                    </tr><tr>
                       <th>Hubungan</th>
-                      <th>Status</th>
-                      <th>Sekolah/Pekerjaan</th>
-                      <th>Fizikal</th>
-                      <th>Mental</th>
-                      <th>Pendapatan/Keperluan</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td ng-bind="products.length+1"></td>
-                      <td><input ng-model="product.name" type="text" name="nama" class="form-control" size="30" required/></td>
-                      <td><input ng-model="product.ic" type="text" name="ic" class="form-control" maxlength="12" size="13" required></td>
-                      <td><input ng-model="product.umur" type="number" name="umur" class="form-control" min="0" maxlength="2" style="width:50px" required></td>
-                      <td><select name="hubungan" ng-model="product.hubungan" id="hubungan" required>
+                      <td><select name="hubungan" ng-model="product.hubungan" class="form-control" id="hubungan" required>
                         <option selected disabled>Sila Pilih</option>
                         <option value="Anak">Anak</option>
                         <option value="Anak Tiri">Anak Tiri</option>    
@@ -75,27 +29,49 @@
                         <option value="Isteri 3">Isteri 3</option>
                         <option value="Isteri 4">Isteri 4</option>
                         </select></td>
-                      <td><select name="status" ng-model="product.status" id="status" required>
+                      </tr><tr>
+                      <th>Status</th>
+                      <td><select name="status" class="form-control" ng-model="product.status" id="status" required>
                         <option selected disabled>Sila Pilih</option>
                         <option value="Sekolah">Sekolah</option>   
                         <option value="Bekerja">Bekerja</option>
                         <option value="Tidak Bekerja">Tidak Bekerja</option>
                         </select></td>
-                          <td><input ng-model="product.kerja" type="text" name="kerja" class="form-control" required></td>
-                        <td><select name="fizikal" ng-model="product.fizikal" id="fizikal" required>
+                      </tr><tr>
+                      <th>Sekolah/Pekerjaan</th>
+                      <td><input ng-model="product.kerja" class="form-control" type="text" name="kerja" class="form-control" required></td>
+                    </tr><tr>
+                      <th>Fizikal</th>
+                        <td><select name="fizikal" class="form-control" ng-model="product.fizikal" id="fizikal" required>
                           <option value="Sihat">Sihat</option>
                           <option value="Sakit">Sakit</option>    
                           <option value="OKU">OKU</option>
                           </select></td>
-                        <td><select name="mental" ng-model="product.mental" id="mental" required>
-                          <option value="Waras">Waras</option>    
-                          <option value="Tidak Waras">Tidak Waras</option>
-                          </select></td>
-                        <td><input ng-model="product.pendapatan" type="number" name="pendapatan" min="0" class="form-control" style="width: 100px" required></td>
-                        <tr>
-                        <td><button class="button" type="submit">Add</button></td>
-                        <td><a href="{{route('index')}}"><button type="button" class="button" style="background-color: red">Tamat</button></a></td>
-                      </tr>
+                        </tr><tr>
+                      <th>Mental</th>
+                      <td><select name="mental" class="form-control" ng-model="product.mental" id="mental" required>
+                        <option value="Waras">Waras</option>    
+                        <option value="Tidak Waras">Tidak Waras</option>
+                        </select></td>
+                      </tr><tr>
+                      <th>Pendapatan/Keperluan</th>
+                      <td><input ng-model="product.pendapatan" type="number" name="pendapatan" min="0" class="form-control" required></td>
+                    </tr>
+                    <form id="redirectForm" action="{{ route('newHarta.view') }}" method="GET">
+                      @csrf
+                      <input type="hidden" name="pemohonId" value="{{ $pemohonId }}">
+                  </form>
+                  
+                    <tr>
+                      <td><button class="button" type="submit">Add</button></td>
+                    </form> 
+                      <form id="redirectForm" action="{{ route('newHarta.view') }}" method="GET">
+                        @csrf
+                        <input type="hidden" name="pemohonId" value="{{ $pemohonId }}">
+                    </form>
+                      <td><button id="redirectToHarta">Selesai</button></td>
+                    </tr>
+                  
                     </tr>
                     <tr ng-repeat="p in products">
                       <td ng-bind="$index+1"></td>
@@ -114,13 +90,15 @@
                       </td>
                     </tr> 
                   </tbody>
-                </table> 
-              </form> 
+                </table>
+              
               <div ng-bind="products | json"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+            </main>
+            <script>
+              document.getElementById('redirectToHarta').addEventListener('click', function() {
+                  document.getElementById('redirectForm').submit();
+              });
+          </script>
 <script>
     var app = angular.module('prongbang',[]);
 app.controller('calcPriceController',function($scope){

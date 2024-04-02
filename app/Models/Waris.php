@@ -29,3 +29,4 @@ class Waris extends Model
         return $this->belongsTo(MaklumatPemohon::class);
     }
 }
+

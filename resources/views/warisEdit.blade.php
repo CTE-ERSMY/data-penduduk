@@ -1,34 +1,23 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('css/table.css')}}">
-    <link rel="stylesheet" href="{{asset('css/navi.css')}}">
-    <title>Sunting Waris</title>
-</head>
+@include('header2a')
 <body>
+    <main class="main">
     <div class="container">
     <form action="{{route('waris.edit', $waris->id)}}" method="POST">
     @csrf
     @method('PUT')
-    <table>
+    <table class="table table-striped">
         <tr>
             <th>Nama</th>
-            <th>:</th>
-            <td><input type="text" name="nama" value="{{$waris->nama}}" required></td>
+            <td><input type="text" name="nama" class="form-control" value="{{$waris->nama}}" required></td>
         </tr><tr>
             <th>No kad. Pengenalan</th>
-            <th>:</th>
-            <td><input type="text" name="ic" value="{{$waris->ic}}" maxlength="12" required></td>
+            <td><input type="text" name="ic" class="form-control" value="{{$waris->ic}}" maxlength="12" required></td>
         </tr><tr>
             <th>Umur</th>
-            <th>:</th>
-            <td><input type="number" name="umur" value="{{$waris->umur}}" min="0" required></td>
+            <td><input type="number" name="umur" class="form-control" value="{{$waris->umur}}" min="0" required></td>
         </tr><tr>
             <th>Hubungan</th>
-            <th>:</th>
-            <td><select name="hubungan" id="hubungan" required>
+            <td><select name="hubungan" class="form-control" id="hubungan" required>
                 <option value="Anak" {{$waris->hubungan == 'Anak' ? 'selected' : ''}}>Anak</option>
                 <option value="Anak Tiri" {{$waris->hubungan == 'Anak Tiri' ? 'selected' : ''}}>Anak Tiri</option>    
                 <option value="Anak Angkat" {{$waris->hubungan == 'Anak Angkat' ? 'selected' : ''}}>Anak Angkat</option>
@@ -40,8 +29,7 @@
             </select></td>
         </tr><tr>
             <th>Status</th>
-            <th>:</th>
-            <td><select name="status" required>
+            <td><select name="status" class="form-control" required>
                 <option value="">Select Status</option>
                 <option value="Sekolah" {{$waris->status == 'Sekolah' ? 'selected' : ''}}>Sekolah</option>
                 <option value="Bekerja" {{$waris->status == 'Bekerja' ? 'selected' : ''}}>Bekerja</option>
@@ -49,34 +37,31 @@
             </select></td>
         </tr><tr>
             <th>Sekolah/Pekerjaan</th>
-            <th>:</th>
-            <td><input type="text" name="kerja" value="{{$waris->kerja}}"></td>
+            <td><input type="text" name="kerja" class="form-control" value="{{$waris->kerja}}"></td>
         </tr><tr>
             <th>Fizikal</th>
-            <th>:</th>
-            <td><select name="fizikal" id="fizikal" required>
+            <td><select name="fizikal" class="form-control" id="fizikal" required>
                 <option value="Sihat" {{ $waris->fizikal == 'Sihat' ? 'selected' : '' }}>Sihat</option>
                 <option value="Sakit" {{ $waris->fizikal == 'Sakit' ? 'selected' : '' }}>Sakit</option>    
                 <option value="OKU" {{ $waris->fizikal == 'OKU' ? 'selected' : '' }}>OKU</option>
                 </select></td>
         </tr><tr>
             <th>Mental</th>
-            <th>:</th>
-            <td><select name="mental" id="mental" required>
+            <td><select name="mental" class="form-control" id="mental" required>
                 <option value="Waras" {{$waris->mental == 'Waras' ? 'selected' : '' }}>Waras</option>    
                 <option value="Tidak Waras" {{$waris->mental == 'Tidak Waras' ? 'selected' : '' }}>Tidak Waras</option>
                 </select></td>
         </tr><tr>
             <th>Pendapatan</th>
-            <th>:</th>
-            <td><input type="number" name="pendapatan" value="{{$waris->pendapatan}}" min="0" required></td>
+            <td><input type="number" name="pendapatan" class="form-control" value="{{$waris->pendapatan}}" min="0" required></td>
         </tr>
         <tr>
-            <th><th><a href="{{ route('waris.details', ['id' => $waris->maklumat_pemohon_id]) }}"><button type="button">Batal</button></a>
-            <th colspan="2"><input type="submit" value="Update"></th>
+            <th colspan="2"><a href="{{ route('waris.details', ['id' => $waris->maklumat_pemohon_id]) }}"><button type="button" class="btn btn-danger">Batal</button>
+            </a><input type="submit" class="btn btn-success" value="Update"></th>
         </tr>
     </table>
     </form>
 </div>
+</main>
 </body>
 </html>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\harta;
 use App\Models\Waris;
 use App\Models\Pendapatan;
 use App\Models\Perbelanjaan;
@@ -228,5 +229,54 @@ class EditController extends Controller
     
         // Redirect back to the details page or any other desired page
         return redirect()->route('waris.details', ['id' => $pemohonId]);
+    }
+    public function hartaEview($id)
+    {
+        $harta = harta::find($id);
+
+        // Check if pemohon exists
+        if (!$harta) {
+            // Handle case where pemohon does not exist
+            abort(404); // Or you can return a view indicating that the pemohon was not found
+        }
+
+        // Pass the pemohon and pasangan details to the view
+        return view('/hartaEdit', ['harta' => $harta]);
+    }
+    public function hartaEdit(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'status_kediaman' => 'required|string',
+            'jenis_kediaman' => 'required|string',
+            'kemudahan' => 'required|string',
+            'bilik' => 'required|numeric|min:0',
+            'kemudahan_tambahan' => 'nullable|string',
+            'nilai_kediaman' => 'nullable|numeric|min:0',
+            'bulanan' => 'nullable|numeric|min:0',
+            'rumah' => 'required|numeric|min:0',
+            'nilai_rumah' => 'nullable|numeric|min:0',
+            'tanah' => 'required|numeric|min:0',
+            'nilai_tanah' => 'nullable|numeric|min:0',
+            'kenderaan' => 'required|numeric|min:0',
+            'astro' => 'required|numeric|min:0',
+            'nilai_astro' => 'nullable|numeric|min:0',
+            'nilai_barang_kemas' => 'nullable|numeric|min:0',
+            'nilai_simpanan' => 'nullable|numeric|min:0',
+            'lain' => 'required|numeric|min:0',
+            'nilai_lain' => 'nullable|numeric|min:0',
+        ]);
+
+        $harta = harta::findOrFail($id);
+    
+        // Update the pemohon data with the validated data
+        $harta->update($validatedData);
+
+        $pemohonId = $harta->maklumat_pemohon_id;
+    
+        // Flash a success message to the session
+        $request->session()->flash('success', 'Data updated successfully');
+    
+        // Redirect back to the edit page or any other desired page
+        return redirect()->route('harta.details', ['id' => $pemohonId]);
     }
 }   

@@ -1,33 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tanggungan dan Waris</title>
-    <link rel="stylesheet" href="{{ asset('css/navi.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/table2.css')}}">
-</head>
-<body>
-    <div class="container">
-    <div class="navigation-bar">
-        <a href="{{route('index')}}" class="tab laman">Laman Utama</a>
-        <a href="{{route('pemohon.details', ['id' => $pemohon->id])}}" class="tab">Profil Peribadi</a>
-        <a href="{{route('kewangan.details', ['id' => $pemohon->id])}}" class="tab">Kewangan</a>
-        <a href="{{route('waris.details', ['id' => $pemohon->id])}}"class="tab active">Tanggungan dan Waris</a>
-        <a href="#"class="tab">Harta</a>
-        <a href="#"class="tab">Bantuan</a>
-        <a href="#"class="tab">Had Kifayah</a>
-        <a href="#"class="tab">Lampiran Dokumen</a>
-        <a href="#"class="tab">Rumusan Siasatan</a>
-        <a href="#"class="tab">Sejarah Bantuan</a>
-    </div>
-    
+@include('header2')  
 @if ($waris->isNotEmpty())
     @php
                 $count=1;
             @endphp
 <h5>MAKLUMAT TANGGUNGAN</h5>
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Bil</th>
@@ -54,7 +31,7 @@
                 <td>{{ $warisData->fizikal }} </td>
                 <td>{{ $warisData->mental }} </td>
                 <td>{{ $warisData->pendapatan }} </td>
-                <td><button type="button"><a href="{{ route('waris.Eview', $warisData->id) }}">Edit</a></button></td>
+                <td><a href="{{ route('waris.Eview', $warisData->id) }}"><button type="button" class="btn btn-info">Edit</button></a></td>
             </tr>       
             @endif
         @endforeach     
@@ -66,7 +43,7 @@ $count2=1;
 @endphp
 <h5>MAKLUMAT WARIS</h5>
 <br>
-<table>
+<table class="table table-striped">
     <thead>
         <tr>
             <th>Bil</th>
@@ -93,7 +70,7 @@ $count2=1;
                 <td>{{ $warisData->fizikal }} </td>
                 <td>{{ $warisData->mental }} </td>
                 <td>{{ $warisData->pendapatan }} </td>
-                <td><a href="{{ route('waris.Eview', $warisData->id) }}"><button>Edit</button></a></td>
+                <td><a href="{{ route('waris.Eview', $warisData->id) }}"><button class="btn btn-info">Edit</button></a></td>
             </tr>        
             @endif  
         @endforeach

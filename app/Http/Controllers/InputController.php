@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\harta;
 use App\Models\Waris;
 use App\Models\Pendapatan;
 use App\Models\Perbelanjaan;
@@ -146,5 +147,49 @@ class InputController extends Controller
         $dataWaris->save();
 
         return view('/newWaris')->with('pemohonId', $pemohonId);
+    }
+    public function hartaView (Request $request)
+    {
+        $pemohonId = $request->input('pemohonId');
+         return view('/newHarta')->with('pemohonId', $pemohonId);
+    }
+    public function hartaNew (Request $request)
+    {
+        $validatedData = $request->validate([
+            'status_kediaman' => 'required|string',
+            'jenis_kediaman' => 'required|string',
+            'kemudahan' => 'required|string',
+            'bilik' => 'required|numeric|min:0',
+            'kemudahan_tambahan' => 'nullable|string',
+            'nilai_kediaman' => 'nullable|numeric|min:0',
+            'bulanan' => 'nullable|numeric|min:0',
+            'rumah' => 'required|numeric|min:0',
+            'nilai_rumah' => 'nullable|numeric|min:0',
+            'tanah' => 'required|numeric|min:0',
+            'nilai_tanah' => 'nullable|numeric|min:0',
+            'kenderaan' => 'required|numeric|min:0',
+            'astro' => 'required|numeric|min:0',
+            'nilai_astro' => 'nullable|numeric|min:0',
+            'nilai_barang_kemas' => 'nullable|numeric|min:0',
+            'nilai_simpanan' => 'nullable|numeric|min:0',
+            'lain' => 'required|numeric|min:0',
+            'nilai_lain' => 'nullable|numeric|min:0',
+        ]);
+        $pemohonId = $request->input('maklumat_pemohon_id');
+
+        $dataHarta = new harta($validatedData);
+        $dataHarta->maklumat_pemohon_id = $pemohonId;
+        
+        $dataHarta->save();
+
+        return view('/hadTanggungan')->with('pemohonId', $pemohonId);
+    }
+    public function hadTanggunganView()
+    {
+        return view('/hadTanggungan');
+    }
+    public function hadTanggunganNew(Request $request)
+    {
+        $validatedData = $request->validate([]);
     }
 }

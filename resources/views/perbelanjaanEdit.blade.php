@@ -1,64 +1,41 @@
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Maklumat Perbelanjaan</title>
-</head>
+@include('header2a')
 <body>
-    <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ asset('css/navi.css')}}">
-    <link rel="stylesheet" href="{{ asset('css/table.css')}}">
-    <title>Suntingan Perbelanjaan</title>
-</head>
-<body>
+    <main class="main">
     <div class="container">
-    <form action="{{ route('perbelanjaan.edit', ['id' => $perbelanjaan->id])}}" method="POST">
-    <table>
-        @csrf
         <h5>PERBELANJAAN ISI RUMAH</h5>
+    <form action="{{ route('perbelanjaan.edit', ['id' => $perbelanjaan->id])}}" method="POST">
+    <table class="table table-striped">
+        @csrf
         <tbody>
             <tr>
                 <th>Makan / Minum</th>
-                <th>:</th>
-                <td>RM:<input type="number" value="{{ old('makan', $perbelanjaan->makan) }}" name="makan" step="0.01" min="0" required></td>
+                <td>RM:<input type="number" value="{{ old('makan', $perbelanjaan->makan) }}" class="form-control" name="makan" step="0.01" min="0" required></td>
             </tr><tr>
                 <th>Perubatan</th>
-                <th>:</th>
-                <td>RM:<input type="number" value="{{ old('perubatan', $perbelanjaan->perubatan) }}" name="perubatan" step="0.01" min="0" required></td>
+                <td>RM:<input type="number" value="{{ old('perubatan', $perbelanjaan->perubatan) }}" class="form-control" name="perubatan" step="0.01" min="0" required></td>
             </tr><tr>
                 <th>Bil TNB / SAJ</th>
-                <th>:</th>
-                <td>RM:<input type="number" value="{{ old('bil', $perbelanjaan->bil) }}" name="bil" step="0.01" min="0" required></td>
+                <td>RM:<input type="number" value="{{ old('bil', $perbelanjaan->bil) }}" class="form-control" name="bil" step="0.01" min="0" required></td>
             </tr><tr>
                 <th>Pengangkutan</th>
-                <th>:</th>
-                <td>RM:<input type="number" value="{{ old('pengangkutan', $perbelanjaan->pengangkutan) }}" name="pengangkutan" step="0.01" min="0" required></td>
+                <td>RM:<input type="number" value="{{ old('pengangkutan', $perbelanjaan->pengangkutan) }}" class="form-control" name="pengangkutan" step="0.01" min="0" required></td>
             </tr><tr>
                 <th>Sewa Rumah</th>
-                <th>:</th>
-                <td>RM:<input type="number" value="{{ old('sewa_rumah', $perbelanjaan->sewa_rumah) }}" name="sewa_rumah" step="0.01" min="0" required></td>
+                <td>RM:<input type="number" value="{{ old('sewa_rumah', $perbelanjaan->sewa_rumah) }}" class="form-control" name="sewa_rumah" step="0.01" min="0" required></td>
             </tr><tr>
                 <th>Persekolahan</th>
-                <th>:</th>
-                <td>RM:<input type="number" value="{{ old('persekolahan', $perbelanjaan->persekolahan) }}" name="persekolahan" step="0.01" min="0" required></td>
+                <td>RM:<input type="number" value="{{ old('persekolahan', $perbelanjaan->persekolahan) }}" class="form-control" name="persekolahan" step="0.01" min="0" required></td>
             </tr><tr>
                 <th>Lain-lain</th>
-                <th>:</th>
-                <td>RM:<input type="number" value="{{ old('lain', $perbelanjaan->lain) }}" name="lain" step="0.01" min="0" required></td> 
+                <td>RM:<input type="number" value="{{ old('lain', $perbelanjaan->lain) }}" class="form-control" name="lain" step="0.01" min="0" required></td> 
             </tr><tr>
-                <th><a href="{{ route('kewangan.details', ['id' => $perbelanjaan->maklumat_pemohon_id]) }}"><button type="button">Batal</button></a></th>
-                <th colspan="2"><input type="submit" value="Update"></th>    
+                <td colspan="2" style="text-align: center"><a href="{{ route('kewangan.details', ['id' => $perbelanjaan->maklumat_pemohon_id]) }}"><button type="button" class="btn btn-danger">Batal</button>
+                </a><input type="submit" class="btn btn-success" value="Update"></td>
             </tr>   
         </tbody> 
     </table>
 </form>     
 </div>
-</body>
-</html>
+</main>
 </body>
 </html>

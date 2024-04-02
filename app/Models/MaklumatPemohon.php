@@ -46,4 +46,24 @@ class MaklumatPemohon extends Model
     {
         return $this->hasOne(Perbelanjaan::class);
     }
+    public function harta()
+    {
+        return $this->hasOne(harta::class);
+    }
+    public function hadTanggungan()
+    {
+        return $this->hasMany(HadTanggungan::class);
+    }
+    public function hadPenolakan()
+    {
+        return $this->hasOne(HadPenolakan::class);
+    }
+    public function hadPenambahan()
+    {
+        return $this->hasOne(HadPenambahan::class);
+    }
+    public function JumlahKifayah()
+    {
+        return $this->hasOne(JumlahKifayah::class);
+    }
 }

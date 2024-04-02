@@ -54,4 +54,13 @@ class DisplayController extends Controller
         }
         return view('warisDetails', ['pemohon' => $pemohon, 'waris' => $pemohon->waris]);
     }
+    public function hartaDetails($id)
+    {
+        $pemohon = MaklumatPemohon::with('harta')->find($id);
+
+        if(!$pemohon) {
+            abort(404);
+        }
+        return view('hartaDetails', ['pemohon' => $pemohon, 'harta' => $pemohon->harta]);
+    }
 }

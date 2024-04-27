@@ -21,12 +21,15 @@ td {
     width: 30%;
 }
 h5 {
-    color: #648ca6;
-    text-align: center;
-    font-size: 20px;
-    font-weight: 500;
-    max-width: 100%;
+    font-size: 18px;
+    border: 1px solid #ccc;
+    background-color: #e6e6e6;
+    color: #000000;
+    min-width: 100px; /* Adjust the width as needed */
     padding: 10px;
+    text-align: center;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+    border-radius: 5px;
 }
 .btn {
     width: 75px;

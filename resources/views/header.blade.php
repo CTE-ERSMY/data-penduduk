@@ -10,10 +10,10 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
       * {
-        
-        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-family:'Montserrat';
         font-weight: 300;
         line-height: 1.5em;
+        letter-spacing: 0.8px;
       }
     </style>
     <title>Menu Utama</title>
@@ -33,10 +33,10 @@
      </div>
      <ul class="sidenav__list" >
 
-       <a style="text-decoration: none; font-weight:500" href="{{route('index')}}"><li class="sidenav__list-item">LAMAN UTAMA</li></a>
-       <a style="text-decoration: none; font-weight:500" href="{{route('newPemohon.view')}}"><li class="sidenav__list-item">PEMOHON BARU</li></a>
-       <a style="text-decoration: none; font-weight:500" href="{{route('pemohon.display')}}"><li class="sidenav__list-item">SEMUA PEMOHON</li></a>
-       <a style="text-decoration: none; font-weight:500" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li class="sidenav__list-item">LOG KELUAR</li></a>
+       <a style="text-decoration: none; font-weight:500" href="{{route('index')}}"><li class="sidenav__list-item"><i class="fas fa-home"></i>&nbsp; LAMAN UTAMA</li></a>
+       <a style="text-decoration: none; font-weight:500" href="{{route('newPemohon.view')}}"><li class="sidenav__list-item"><i class="fas fa-user-plus"></i>&nbsp; PEMOHON BARU</li></a>
+       <a style="text-decoration: none; font-weight:500" href="{{route('pemohon.display')}}"><li class="sidenav__list-item"><i class="fas fa-clipboard-list"></i>&nbsp; SEMUA PEMOHON</li></a>
+       <a style="text-decoration: none; font-weight:500" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><li class="sidenav__list-item"><i class="fas fa-power-off"></i>&nbsp; LOG KELUAR</li></a>
         <form id="logout-form" method="POST" action="{{ route('logout') }}" style="display: none;">
           @csrf
       </form>

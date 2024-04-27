@@ -12,15 +12,14 @@
 <main class="main">
     <div class="container"> 
     <div class="navigation-bar">
-        <a class="tab active">Pemohon</a>
-        <a href="{{route('newPasangan.view')}}" class="tab">Pasangan</a>
-        <a href="{{route('pendapatan.view')}}" class="tab">Pendapatan</a>
-        <a href="{{route('perbelanjaan.view')}}" class="tab">Perbelanjaan</a>
-        <a href="{{route('newWaris.view')}}" class="tab">Tanggungan dan Waris</a>
-        <a href="{{route('newHarta.view')}}" class="tab">Harta</a>
-        <a class="tab">Bantuan</a>
-        <a href="{{route('hadTanggungan.view')}}" class="tab">Had Kifayah</a>
-        <a class="tab">Lampiran Dokumen</a>
-        <a class="tab">Rumusan Siasatan</a>
-        <a class="tab">Sejarah Bantuan</a>
+        <a class="tab ">Pemohon</a>
+        <a href="{{route('newPasangan.view')}}" class="tab ">Pasangan</a>
+        <a href="{{route('pendapatan.view')}}" class="tab ">Pendapatan</a>
+        <a href="{{route('perbelanjaan.view')}}" class="tab ">Perbelanjaan</a>
+        <a href="{{route('newWaris.view')}}" class="tab ">Tanggungan dan Waris</a>
+        <a href="{{route('newHarta.view')}}" class="tab ">Harta</a>
+        <a href="{{route('hadTanggungan.view')}}" class="tab">Had Tanggungan</a>
+        <a href="{{route('hadPenambahan.view')}}" class="tab">Had Penambahan</a>
+        <a href="{{route('hadPenolakan.view')}}" class="tab">Had Penolakan</a>
+        <a href="{{route('sejarahBantuan.view')}}" class="tab">Sejarah Bantuan</a>
     </div>

@@ -279,4 +279,4 @@ class EditController extends Controller
         // Redirect back to the edit page or any other desired page
         return redirect()->route('harta.details', ['id' => $pemohonId]);
     }
-}   
+}

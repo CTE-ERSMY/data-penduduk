@@ -63,4 +63,22 @@ class DisplayController extends Controller
         }
         return view('hartaDetails', ['pemohon' => $pemohon, 'harta' => $pemohon->harta]);
     }
+    public function kifayahDetails($id)
+    {
+        $pemohon = MaklumatPemohon::with(['hadTanggungan', 'hadPenolakan', 'hadPenambahan'])->find($id);
+
+        if(!$pemohon) {
+            abort(404);
+        }
+        return view('kifayahDetails', ['pemohon' => $pemohon, 'hadTanggungan' => $pemohon->hadTanggungan, 'hadPenolakan' => $pemohon->hadPenolakan, 'hadPenambahan' => $pemohon->hadPenambahan]);
+    }
+    public function sejarahDetails($id)
+    {
+        $pemohon = MaklumatPemohon::with('sejarahBantuan')->find($id);
+
+        if(!$pemohon) {
+            abort(404);
+        }
+        return view('sejarahDetails', ['pemohon' => $pemohon, 'sejarahBantuan' => $pemohon->sejarahBantuan]);
+    }
 }

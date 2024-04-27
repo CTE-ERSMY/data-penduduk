@@ -1,15 +1,15 @@
 @include('header3')
 <div id="pemohon">
-  <h5>MAKLUMAT PEMOHON</h5>
+  <h5>Maklumat Pemohon</h5>
   <form action="{{ route('newPemohon.new')}}" method="POST">
       @csrf
       <table class="table table-border">
           <tbody>
               <tr>
                   <th>Nama Pemohon</th>
-                  <td><input type="text" name="nama" class="form-control" required></td>
+                  <td><input type="text" name="nama" placeholder="Nama Penuh" class="form-control" required></td>
                   <th>No. Kad Pengenalan</th>
-                  <td><input type="text" name="ic" maxlength="12" class="form-control" required></td>
+                  <td><input type="text" name="ic" maxlength="12" placeholder="tanpa (-)" class="form-control" required></td>
               </tr><tr>
                   <th>Jantina</th>
                   <td><select name="jantina" id="jantina" class="form-control" required>
@@ -63,10 +63,10 @@
                       </select>
                   </td>
                   <th>No. Telefon Rumah</th>
-                  <td><input type="text" name="nombor_rumah" id="nombor_rumah" class="form-control"></td>
+                  <td><input type="text" name="nombor_rumah" placeholder="tanpa (-)" id="nombor_rumah" class="form-control"></td>
               </tr><tr>
                   <th>No. Telefon Bimbit</th>
-                  <td><input type="text" name="nombor_bimbit" id="nombor_bimbit" class="form-control" required></td>
+                  <td><input type="text" name="nombor_bimbit" placeholder="tanpa (-)" id="nombor_bimbit" class="form-control" required></td>
               </tr>
               <tr>
                   <td colspan="4" style="text-align: center"><button type="reset" class="btn btn-danger" style="margin-left: 10px; margin-right: 10px">Batal</button><input type="submit" class="btn btn-success" value="Lanjut" style="margin-left: 10px; margin-right: 10px">

@@ -1,5 +1,5 @@
 @include('header3')
-<h5>Maklumat Harta Pemohon</h5>
+
     <form action="{{ route('newHarta.new')}}" method="POST">
     <table class="table table-border">
         @csrf
@@ -61,24 +61,20 @@
                 <th>Nilai Bayaran Astro</th>
                 <td><input type="number" value="{{ old('nilai_astro')}}" min="0" name="nilai_astro" class="form-control"></td> 
             </tr><tr>
-            </tr><tr>
                 <th>Nilai Barang Kemas</th>
                 <td><input type="number" min="0" value="{{ old('nilai_barang_kemas')}}" name="nilai_barang_kemas" class="form-control"></td> 
-            </tr><tr>
             </tr><tr>
                 <th>Nilai Wang Simpanan</th>
                 <td><input type="number" value="{{ old('nilai_simpanan')}}" min="0" name="nilai_simpanan" class="form-control"></td> 
             </tr><tr>
-            </tr><tr>
                 <th>Lain - lain</th>
                 <td><input type="text" value="{{ old('lain')}}" name="lain" class="form-control"></td> 
-            </tr><tr>
             </tr><tr>
                 <th>Nilai Lain - lain</th>
                 <td><input type="number" value="{{ old('nilai_lain')}}" min="0" name="nilai_lain" class="form-control"></td> 
             </tr><tr>
 
-                <th colspan="3"><center><input type="submit" class="button" value="Seterusnya"></center></th>    
+                <th colspan="3"><center><input type="submit" class="btn btn-success" value="Lanjut"></center></th>    
             </tr>   
         </tbody> 
     </table>

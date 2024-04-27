@@ -1,0 +1,247 @@
+@include('header3')
+<h5>Maklumat Tanggungan Dan Waris</h5>
+<form action="{{route('newWaris.new')}}" method="POST">
+@csrf
+@if(isset($pemohonId))
+            <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
+            @endif
+    <table class="table table-border">
+        <tr>
+            <th>Nama</th>
+            <th>No. Kad Pengenalan</th>
+            <th>Umur</th>
+            <th>Hubungan</th>
+            <th>Status</th>
+        </tr><tr>
+            <td><input type="text" name="nama[]" id="nama" class="form-control" required></td>
+            <td><input type="text" name="ic[]" id="ic" maxlength="12" class="form-control" required></td>
+            <td><input type="number" name="umur[]" id="umur" min="0" class="form-control" required></td>
+            <td><select name="hubungan[]" class="form-control" id="hubungan" required>
+              <option selected disabled>Sila Pilih</option>
+              <option value="Anak">Anak</option>
+              <option value="Anak Tiri">Anak Tiri</option>    
+              <option value="Anak Angkat">Anak Angkat</option>
+              <option value="Anak Saudara">Anak Saudara</option>
+              <option value="Isteri 1">Isteri 1</option>
+              <option value="Isteri 2">Isteri 2</option>
+              <option value="Isteri 3">Isteri 3</option>
+              <option value="Isteri 4">Isteri 4</option>
+              </select></td>
+            <td><select name="status[]" class="form-control" id="status" required>
+              <option selected disabled>Sila Pilih</option>
+              <option value="Sekolah">Sekolah</option>   
+              <option value="Bekerja">Bekerja</option>
+              <option value="Tidak Bekerja">Tidak Bekerja</option>
+              </select></td>
+        </tr><tr>
+          <th>Pekerjaan</th>
+            <th>Fizikal</th>
+            <th>Mental</th>
+            <th>Pendapatan / Keperluan</th>
+            <th><a href="javascript:void(0)" class="btn btn-success addRow">+</a></th>
+        </tr><tr>
+            <td><input type="text" name="kerja[]" id="kerja" class="form-control" required></td>
+            <td><select name="fizikal[]" class="form-control" id="fizikal" required>
+              <option value="Sihat">Sihat</option>
+              <option value="Sakit">Sakit</option>    
+              <option value="OKU">OKU</option>
+              </select></td>
+            <td><select name="mental[]" class="form-control" id="mental" required>
+              <option value="Waras">Waras</option>    
+              <option value="Tidak Waras">Tidak Waras</option>
+              </select></td>
+            <td><input type="number" name="pendapatan[]" id="pendapatan" class="form-control" required></td>
+            <th><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></th>
+        </tr>
+    </table>
+    <button type="submit" class="btn btn-success">Selesai</button>
+
+</form>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('body').on('click', '.addRow', function(){
+            var tr = "<tr>"+
+                  "<td><input type='text' value='{{ old('nama')}}' name='nama[]' placeholder='Nama'></td>";
+                 "<td><input type='text' value='{{ old('ic')}}' name='ic[]' placeholder='No Kad. Pengenalan' ></td> ";
+                 "<td><input type='number' value='{{ old('umur')}}' min='0' name='umur[]' placeholder='Umur'></td>";
+                 "<td>"
+                 "<select name='hubungan[]'>" +
+                    "<option selected disabled>Hubungan</option>" +
+                    "<option value='Anak' {{ old('hubungan') == 'Anak' ? 'selected' : '' }}>Anak</option>" +
+                    "<option value='Anak Tiri' {{ old('hubungan') == 'Anak Tiri' ? 'selected' : '' }}>Anak Tiri</option>" +
+                    "<option value='Anak Angkat' {{ old('hubungan') == 'Anak Angkat' ? 'selected' : '' }}>Anak Angkat</option>" +
+                    "<option value='Anak Saudara' {{ old('hubungan') == 'Anak Saudara' ? 'selected' : '' }}>Anak Saudara</option>" +
+                    "<option value='Isteri 1' {{ old('hubungan') == 'Isteri 1' ? 'selected' : '' }}>Isteri 1</option>" +
+                    "<option value='Isteri 2' {{ old('hubungan') == 'Isteri 2' ? 'selected' : '' }}>Isteri 2</option>" +
+                    "<option value='Isteri 3' {{ old('hubungan') == 'Isteri 3' ? 'selected' : '' }}>Isteri 3</option>" +
+                    "<option value='Isteri 4' {{ old('hubungan') == 'Isteri 4' ? 'selected' : '' }}>Isteri 4</option>" +
+                  "</select>";
+                  "</td>"
+                "<td>"
+                 "<select name='status[]' >"+
+                        "<option selected disabled>Status</option>"+
+                        "<option value='Sekolah' {{ old('status') == 'Sekolah' ? 'selected' : '' }}>Sekolah</option>"+   
+                        "<option value='Bekerja' {{ old('status') == 'Bekerja' ? 'selected' : '' }}>Bekerja</option>"+
+                        "<option value='Tidak Bekerja' {{ old('status') == 'Tidak Bekerja' ? 'selected' : '' }}>Tidak Bekerja</option>"+
+                        "</select>";
+                        "</td>"
+                 "<td>input type='text' value='{{ old('kerja')}}' name='kerja[]' placeholder='Pekerjaan/Sekolah'></td>";
+                 "<td>"
+                 "<select name='fizikal[]'>"+
+                          "<option selected disabled>Fizikal</option>"+
+                          "<option value='Sihat' {{ old('fizikal') == 'Sihat' ? 'selected' : '' }}>Sihat</option>"+
+                          "<option value='Sakit' {{ old('fizikal') == 'Sakit' ? 'selected' : '' }}>Sakit</option>"+    
+                          "<option value='OKU' {{ old('fizikal') == 'OKU' ? 'selected' : '' }}>OKU</option>"+ 
+                          "</select>";
+                    "</td>"
+                "<td>"
+                 "<select name='mental[]'>"+
+                          "<option selected disabled>Mental</option>"+
+                          "<option value='Waras' {{ old('mental') == 'Waras' ? 'selected' : '' }}>Waras</option>"+    
+                          "<option value='Tidak Waras' {{ old('mental') == 'Tidak Waras' ? 'selected' : '' }}>Tidak Waras</option>"+
+                        "</select>";
+                        "</td>"
+                 "<td><input type='number' min='0' value='{{ old('pendapatan')}}' name='pendapatan_waris[]' placeholder='Pendapatan'></td>";
+                 "<th><a href='javascript:void(0)' class='btn btn-danger deleteRow'>-</a></th>"
+                 });
+        $('body').on('click', '.deleteRow', function(){
+            $(this).closest('tr').remove();
+        });
+    });
+  </script>
+</form>
+
+
+@include('header3')
+<header>
+  <style>
+    th, td {
+      width: 11%;
+    }
+    .small {
+      width: 8%
+    }
+  </style>
+</header>
+<h5>Maklumat Tanggungan Dan Waris</h5>
+<form action="{{route('newWaris.new')}}" method="POST">
+    @csrf
+    @if(isset($pemohonId))
+        <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
+    @endif
+    <div style="overflow: auto">
+    <table class="table table-border">
+        <tr>
+            <th>Nama</th>
+            <th>No. Kad Pengenalan</th>
+            <th class="small">Umur</th>
+            <th>Hubungan</th>
+            <th>Status</th>
+            <th>Pekerjaan</th>
+            <th>Fizikal</th>
+            <th>Mental</th>
+            <th>Pendapatan / Keperluan</th>
+            <th><a href="javascript:void(0)" class="btn btn-success addRow">+</a></th>
+        </tr>
+        <tr>
+            <td><input type="text" name="nama[]" id="nama" class="form-control" required></td>
+            <td><input type="text" name="ic[]" id="ic" maxlength="12" class="form-control" required></td>
+            <td class="small"><input type="number" name="umur[]" id="umur" min="0" class="form-control" required></td>
+            <td>
+                <select name="hubungan[]" class="form-control" id="hubungan" required>
+                    <option selected disabled>Sila Pilih</option>
+                    <option value="Anak">Anak</option>
+                    <option value="Anak Tiri">Anak Tiri</option>    
+                    <option value="Anak Angkat">Anak Angkat</option>
+                    <option value="Anak Saudara">Anak Saudara</option>
+                    <option value="Isteri 1">Isteri 1</option>
+                    <option value="Isteri 2">Isteri 2</option>
+                    <option value="Isteri 3">Isteri 3</option>
+                    <option value="Isteri 4">Isteri 4</option>
+                </select>
+            </td>
+            <td>
+                <select name="status[]" class="form-control" id="status" required>
+                    <option selected disabled>Sila Pilih</option>
+                    <option value="Sekolah">Sekolah</option>   
+                    <option value="Bekerja">Bekerja</option>
+                    <option value="Tidak Bekerja">Tidak Bekerja</option>
+                </select>
+            </td>
+              <td><input type="text" name="kerja[]" id="kerja" class="form-control" required></td>
+              <td><select name="fizikal[]" class="form-control" id="fizikal" required>
+                <option value="Sihat">Sihat</option>
+                <option value="Sakit">Sakit</option>    
+                <option value="OKU">OKU</option>
+                </select></td>
+              <td><select name="mental[]" class="form-control" id="mental" required>
+                <option value="Waras">Waras</option>    
+                <option value="Tidak Waras">Tidak Waras</option>
+                </select></td>
+              <td><input type="number" name="pendapatan[]" id="pendapatan" class="form-control" required></td>
+              <th><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></th>
+        </tr>
+       
+        <!-- Placeholder row for adding new rows -->
+        <tr id="placeholderRow" style="display: none;">
+            <td><input type="text" name="nama[]" placeholder="Nama" class="form-control"></td>
+            <td><input type="text" name="ic[]" placeholder="No Kad. Pengenalan" class="form-control" maxlength="12"></td>
+            <td class="small"><input type="number" name="umur[]" placeholder="Umur" class="form-control" min="0"></td>
+            <td>
+                <select name="hubungan[]" class="form-control">
+                    <option selected disabled>Sila Pilih</option>
+                    <option value="Anak">Anak</option>
+                    <option value="Anak Tiri">Anak Tiri</option>    
+                    <option value="Anak Angkat">Anak Angkat</option>
+                    <option value="Anak Saudara">Anak Saudara</option>
+                    <option value="Isteri 1">Isteri 1</option>
+                    <option value="Isteri 2">Isteri 2</option>
+                    <option value="Isteri 3">Isteri 3</option>
+                    <option value="Isteri 4">Isteri 4</option>
+                </select>
+            </td>
+            <td>
+                <select name="status[]" class="form-control">
+                    <option selected disabled>Sila Pilih</option>
+                    <option value="Sekolah">Sekolah</option>   
+                    <option value="Bekerja">Bekerja</option>
+                    <option value="Tidak Bekerja">Tidak Bekerja</option>
+                </select>
+            </td>
+            <td><input type="text" name="kerja[]" placeholder="Pekerjaan/Sekolah" class="form-control"></td>
+            <td>
+                <select name="fizikal[]" class="form-control">
+                    <option selected disabled>Fizikal</option>
+                    <option value="Sihat">Sihat</option>
+                    <option value="Sakit">Sakit</option>    
+                    <option value="OKU">OKU</option>
+                </select>
+            </td>
+            <td>
+                <select name="mental[]" class="form-control">
+                    <option selected disabled>Mental</option>
+                    <option value="Waras">Waras</option>    
+                    <option value="Tidak Waras">Tidak Waras</option>
+                </select>
+            </td>
+            <td><input type="number" name="pendapatan_waris[]" placeholder="Pendapatan" class="form-control" min="0"></td>
+            <td><a href="javascript:void(0)" class="btn btn-danger deleteRow">-</a></td>
+        </tr>
+    </table>
+  </div>
+    <button type="submit" class="btn btn-success">Selesai</button>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function(){
+        $('.addRow').click(function(){
+            $('#placeholderRow').clone().removeAttr('id').removeAttr('style').appendTo('table');
+        });
+
+        $('body').on('click', '.deleteRow', function(){
+            $(this).closest('tr').remove();
+        });
+    });
+</script>

@@ -36,14 +36,15 @@ body {
 
 }
 .tab:hover {
-    background-color:#f1f1f1;
+    background-color:#a9e4bd;
     text-decoration: none;
     color: #000000;
 }
 
 .active {
-    background-color: #bae8c9;
-    border: 2px solid #53db80;
+    background-color: #aee0bf;
+    border: 1px solid #a4fec2;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 .laman {
     background-color: #fc1414;
@@ -52,7 +53,7 @@ body {
 }
 a {
     text-decoration: none;
-    font-size: 13px;
+    font-size: 14px;
     font-weight: bolder;
 
 }

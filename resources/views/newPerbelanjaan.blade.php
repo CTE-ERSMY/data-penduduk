@@ -6,7 +6,6 @@
         @if(isset($pemohonId))
         <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
         @endif
-        <h5>PERBELANJAAN ISI RUMAH</h5>
         <tbody>
             <tr>
                 <th>Makan / Minum</th>
@@ -30,7 +29,7 @@
                 <th>Lain-lain</th>
                 <td>RM<input type="number" class="form-control" name="lain" step="0.01" min="0" required></td> 
             </tr><tr>
-                <th colspan="3"><center><input type="submit" class="button" value="Seterusnya"></center></th>    
+                <th colspan="3"><center><input type="submit" class="btn btn-success" value="Lanjut"></center></th>    
             </tr>   
         </tbody> 
     </table>

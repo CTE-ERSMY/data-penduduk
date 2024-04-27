@@ -66,4 +66,8 @@ class MaklumatPemohon extends Model
     {
         return $this->hasOne(JumlahKifayah::class);
     }
+    public function SejarahBantuan()
+    {
+        return $this->hasOne(SejarahBantuan::class);
+    }
 }

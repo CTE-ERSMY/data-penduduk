@@ -1,7 +1,6 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
     box-sizing: border-box;
   }
   
@@ -85,7 +84,7 @@ body {
   
   .sidenav__list-item {
     padding: 20px 20px 20px 40px;
-    font-size: 13px;
+    font-size: 14px;
     color: #ddd;
     font-weight: 300;
     line-height: 1.5em;

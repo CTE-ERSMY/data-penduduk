@@ -1,5 +1,5 @@
 @include('header3')
-    <h5>MAKLUMAT PASANGAN</h5>
+    <h5>Maklumat Pasangan</h5>
         <form action="{{ route('newPasangan.new')}}" method="POST">
             @csrf
              @if(isset($pemohonId))
@@ -11,7 +11,7 @@
                     <th>Nama Pemohon</th>
                     <td><input type="text" name="nama" placeholder="Nama Penuh" class="form-control" required></td>
                     <th>No. Kad Pengenalan</th>
-                    <td><input type="text" name="ic" placeholder="12345601XXXX" class="form-control" maxlength="12" required></td>
+                    <td><input type="text" name="ic" placeholder="tanpa (-)" class="form-control" maxlength="12" required></td>
                 </tr><tr>
                     <th>Jantina</th>
                     <td><select name="jantina" id="jantina" class="form-control" required>
@@ -55,7 +55,7 @@
                 </tr><tr>
                     <th rowspan="2">Alamat</th>
                     <td rowspan="2">
-                        <input type="text" name="alamat" class="form-control" placeholder="lot 1234, jalan xxxxxx, Felda Sg Mas" size="50" required><br>
+                        <input type="text" name="alamat" class="form-control" size="50" required><br>
                         <select name="poskod" class="form-control" id="poskod">
                             <option selected value="81900" class="form-control" required>81900</option>
                         </select><br>
@@ -64,13 +64,13 @@
                         </select>
                     </td>
                     <th>No. Telefon Rumah</th>
-                    <td><input type="text" name="nombor_rumah" class="form-control" id="nombor_rumah" placeholder="tiada(-), 0XXXXXXXX"></td>
+                    <td><input type="text" name="nombor_rumah" class="form-control" id="nombor_rumah" placeholder="tanpa (-)"></td>
                 </tr><tr>
                     <th>No. Telefon Bimbit</th>
-                    <td><input type="text" name="nombor_bimbit" class="form-control" id="nombor_bimbit" placeholder="tiada(-), 01XXXXXXXXX" required></td>
+                    <td><input type="text" name="nombor_bimbit" class="form-control" id="nombor_bimbit" placeholder="tanpa (-)" required></td>
                 </tr>
                 <tr>
-                    <th colspan="6"><center><input type="submit" class="btn btn-success" value="Seterusnya"></center></th>    
+                    <th colspan="6"><center><input type="submit" class="btn btn-success" value="Lanjut"></center></th>    
                 </tr>    
             </tbody>    
         </table>

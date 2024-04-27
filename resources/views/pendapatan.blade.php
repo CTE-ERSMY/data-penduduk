@@ -1,5 +1,4 @@
 @include('header3')
-    <h5>Maklumat Pendapatan</h5>
     <form action="{{ route('pendapatan.new')}}" method="POST">
         @csrf
         @if(isset($pemohonId))
@@ -7,7 +6,7 @@
             @endif
         
         <table class="table table-border">
-            <h5>PENDAPATAN PEMOHON</h5>
+            <h5>Pendapatan Pemohon</h5>
             <tbody>
                 <tr>
                     <th>Jawatan</th>
@@ -22,7 +21,7 @@
         </table>
         <br><br>
         <table class="table table-border">
-            <h5>PENDAPATAN PASANGAN</h5>
+            <h5>Pendapatan Pasangan</h5>
             <tbody>
                 <tr>
                     <th>Jawatan</th>
@@ -38,7 +37,7 @@
         </table>
         <br><br>
         <table class="table table-border">
-            <h5>PENDAPATAN DAN LAIN-LAIN SUMBANGAN</h5>
+            <h5>Pendapatan Dan Lain - Lain Sumbangan</h5>
             <tbody>
                 <tr>
                     <th>Sumbangan Anak</th>
@@ -53,7 +52,7 @@
                     <th>Sumbangan Agensi</th>
                     <td>RM<input type="number" class="form-control" name="sumbangan_agensi" step="0.01" min="0" required></td>
                 </tr><tr>
-                    <th colspan="3"><center><input type="submit" class="button" value="Seterusnya"></center></th>
+                    <th colspan="3"><center><input type="submit" class="btn btn-success" value="Lanjut"></center></th>
                 </tr> 
             </tbody> 
         </table>

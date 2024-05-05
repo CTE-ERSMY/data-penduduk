@@ -10,7 +10,7 @@
         <tbody>
             <tr>
                 <th>Status Kediaman</th>
-                <td><input type="text"value="{{ old('status_kediaman')}}" name="status_kediaman" class="form-control"></td>
+                <td><input type="text" value="{{ old('status_kediaman')}}" name="status_kediaman" class="form-control"></td>
             </tr><tr>
                 <th>Jenis Kediaman</th>
                 <td><input type="text" value="{{ old('jenis_kediaman')}}" name="jenis_kediaman" class="form-control"></td>

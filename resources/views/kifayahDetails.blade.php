@@ -20,6 +20,7 @@
                 <th style="width:5%">Bil</th>
                 <th style="width:50%">Butiran Had Kifayah</th>
                 <th style="width:40%">Jumlah (RM)</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         @foreach ($hadTanggungan as $tanggungan)
@@ -28,6 +29,7 @@
                 <td style="width:5%">{{ $count++ }}</td>
                 <td>{{ $tanggungan->butiran_tanggungan }}</td>
                 <td>{{ $tanggungan->jumlah_tanggungan }} </td>
+                <td><a href="{{ route('hadTanggungan.Eview', $tanggungan->id) }}"><button type="button" class="btn btn-info">Edit</button></a></td>
             </tr>
         </tbody>
         @endforeach
@@ -120,6 +122,7 @@
         </tbody>
     </table>
     @endif
+    <center><h4><a href="{{ route('hadPenolakan.Eview', ['id' => $hadPenolakan->id]) }}">Edit Had Penolakan</a></h4></center>
     
     @if ($hadPenambahan)
     <h5>Had Penambahan</h5>
@@ -186,4 +189,5 @@
         </tbody>
     </table>
     @endif
+    <center><h4><a href="{{ route('hadPenambahan.Eview', ['id' => $hadPenambahan->id]) }}">Edit Had Penambahan</a></h4></center>
 </main>

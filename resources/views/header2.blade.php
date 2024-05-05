@@ -16,9 +16,6 @@
         <a href="{{route('kewangan.details', ['id' => $pemohon->id])}}" class="tab">Kewangan</a>
         <a href="{{route('waris.details', ['id' => $pemohon->id])}}" class="tab active">Tanggungan dan Waris</a>
         <a href="{{route('harta.details', ['id' => $pemohon->id])}}" class="tab">Harta</a>
-        <a href="{{route('harta.details', ['id' => $pemohon->id])}}" class="tab">Bantuan</a>
-        <a href="{{route('kifayah.details', ['id' => $pemohon->id])}} "class="tab">Had Kifayah</a>
-        <a href="# "class="tab">Lampiran Dokumen</a>    
-        <a href="# "class="tab">Rumusan Siasatan</a>
-        <a href="# "class="tab">Sejarah Bantuan</a>
+        <a href="{{route('kifayah.details', ['id' => $pemohon->id])}}" class="tab">Had Kifayah</a>   
+        <a href="{{route('sejarah.details', ['id' => $pemohon->id])}}" class="tab">Sejarah Bantuan</a>
     </div>

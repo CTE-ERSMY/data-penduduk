@@ -33,7 +33,7 @@ Route::get('/perbelanjaanView', [InputController::class, 'perbelanjaanView'])->n
 Route::post('/perbelanjaanNew', [InputController::class, 'perbelanjaanNew'])->name('perbelanjaan.new');
 Route::get('/warisView', [InputController::class, 'warisView'])->name('newWaris.view');
 Route::post('/warisNew', [InputController::class, 'warisNew'])->name('newWaris.new');
-Route::get('/hartaView', [InputController::class, 'hartaView'])->name('newHarta.view');
+Route::get('/hartaView/{pemohonId}', [InputController::class, 'hartaView'])->name('newHarta.view');
 Route::post('/hartaNew', [InputController::class, 'hartaNew'])->name('newHarta.new');
 Route::get('/hadTanggunganView', [InputController::class, 'hadTanggunganView'])->name('hadTanggungan.view');
 Route::post('/hadTanggunganNew', [InputController::class, 'hadTanggunganNew'])->name('hadTanggungan.new');
@@ -49,6 +49,7 @@ Route::get('/kewanganDetails/{id}', [DisplayController::class, 'kewanganDetails'
 Route::get('/warisDetails/{id}', [DisplayController::class, 'warisDetails'])->name('waris.details');
 Route::get('/hartaDetails/{id}', [DisplayController::class, 'hartaDetails'])->name('harta.details');
 Route::get('/kifayahDetails/{id}', [DisplayController::class, 'kifayahDetails'])->name('kifayah.details');
+Route::get('/sejarahDetails/{id}', [DisplayController::class, 'sejarahDetails'])->name('sejarah.details');
 Route::delete('/pemohonDelete/{id}', [EditController::class, 'pemohonDelete'])->name('pemohon.delete');
 Route::get('/pemohonEView{id}', [EditController::class, 'pemohonEView'])->name('pemohon.Eview');
 Route::post('/pemohonEdit{id}', [EditController::class, 'pemohonEdit'])->name('pemohon.edit');
@@ -62,3 +63,11 @@ Route::get('/warisEview{id}', [EditController::class, 'warisEview'])->name('wari
 Route::put('/warisEdit{id}', [EditController::class, 'warisEdit'])->name('waris.edit');
 Route::get('/hartaEview{id}', [EditController::class, 'hartaEview'])->name('harta.Eview');
 Route::post('/hartaEdit{id}', [EditController::class, 'hartaEdit'])->name('harta.edit');
+Route::get('/hadTanggunganEview{id}', [EditController::class, 'hadTanggunganEview'])->name('hadTanggungan.Eview');
+Route::post('/hadTanggunganEdit{id}', [EditController::class, 'hadTanggunganEdit'])->name('hadTanggungan.edit');
+Route::get('/hadPenambahanEview{id}', [EditController::class, 'hadPenambahanEview'])->name('hadPenambahan.Eview');
+Route::post('/hadPenambahanEdit{id}', [EditController::class, 'hadPenambahanEdit'])->name('hadPenambahan.edit');
+Route::get('/hadPenolakanEview{id}', [EditController::class, 'hadPenolakanEview'])->name('hadPenolakan.Eview');
+Route::post('/hadPenolakanEdit{id}', [EditController::class, 'hadPenolakanEdit'])->name('hadPenolakan.edit');
+Route::get('/sejarahEview{id}', [EditController::class, 'sejarahEview'])->name('sejarah.Eview');
+Route::post('/sejarahEdit{id}', [EditController::class, 'sejarahEdit'])->name('sejarah.edit');

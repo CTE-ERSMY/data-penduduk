@@ -17,7 +17,7 @@
         <a href="{{route('pendapatan.view')}}" class="tab ">Pendapatan</a>
         <a href="{{route('perbelanjaan.view')}}" class="tab ">Perbelanjaan</a>
         <a href="{{route('newWaris.view')}}" class="tab ">Tanggungan dan Waris</a>
-        <a href="{{route('newHarta.view')}}" class="tab ">Harta</a>
+        <a class="tab ">Harta</a>
         <a href="{{route('hadTanggungan.view')}}" class="tab">Had Tanggungan</a>
         <a href="{{route('hadPenambahan.view')}}" class="tab">Had Penambahan</a>
         <a href="{{route('hadPenolakan.view')}}" class="tab">Had Penolakan</a>

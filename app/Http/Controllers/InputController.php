@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\harta;
 use App\Models\Waris;
 use App\Models\Pendapatan;
+use App\Models\HadPenolakan;
 use App\Models\Perbelanjaan;
 use Illuminate\Http\Request;
+use App\Models\HadPenambahan;
 use App\Models\HadTanggungan;
 use App\Models\SejarahBantuan;
 use App\Models\MaklumatPemohon;
@@ -153,15 +155,20 @@ class InputController extends Controller
         // Save the model to the database
         $waris->save();
     
+        $request->session()->flash('pemohonId', $pemohonId);
         // Retrieve all existing Waris data for the current pemohonId
         $allWarisData = Waris::where('maklumat_pemohon_id', $pemohonId)->get();
 
     // Pass the pemohonId and allWarisData to the view
-    return view('/newWaris', compact('pemohonId', 'allWarisData'));
+    return view('/newWaris')->with(['pemohonId' => $pemohonId, 'allWarisData' => $allWarisData]);
     }
-    public function hartaView (Request $request)
+    public function hartaView($pemohonId)
     {
-        return view('/newHarta');
+    // Example: Fetch data related to this $pemohonId from the database
+    $hartaData = harta::where('maklumat_pemohon_id', $pemohonId)->get();
+
+    // Pass the $pemohonId and $hartaData to the view
+    return view('/newHarta', compact('pemohonId', 'hartaData'));
     }
     public function hartaNew (Request $request)
     {
@@ -219,7 +226,7 @@ class InputController extends Controller
             $hadTanggungan = new HadTanggungan($datasave);
             $pemohon->hadTanggungan()->save($hadTanggungan);
         }
-        Session::put('success', "Data Berjaya dimasukkan");
+  
         return view('/hadPenambahan')->with('pemohonId', $pemohonId);
     }
     public function hadPenambahanView ()
@@ -230,7 +237,6 @@ class InputController extends Controller
     {
         $validatedData = $request->validate([
             'int_kos_kronik' => 'required|numeric|min:0',
-            'int_cacat' => 'required|numeric|min:0',
             'int_cacat_semulajadi' => 'nullable|numeric|min:0',
             'int_cacat_mendatang' => 'nullable|numeric|min:0',
             'int_ibu_bapa' => 'required|numeric|min:0',
@@ -247,7 +253,7 @@ class InputController extends Controller
         ]);
         $pemohonId = $request->input('maklumat_pemohon_id');
 
-        $hadPenambahan = new hadPenambahan($validatedData);
+        $hadPenambahan = new HadPenambahan($validatedData);
         $hadPenambahan->maklumat_pemohon_id = $pemohonId;
         
         $hadPenambahan->save();
@@ -283,7 +289,7 @@ class InputController extends Controller
         ]);
         $pemohonId = $request->input('maklumat_pemohon_id');
 
-        $hadPenolakan = new hadPenolakan($validatedData);
+        $hadPenolakan = new HadPenolakan($validatedData);
         $hadPenolakan->maklumat_pemohon_id = $pemohonId;
         
         $hadPenolakan->save();
@@ -296,8 +302,8 @@ class InputController extends Controller
     }
     public function sejarahBantuanNew(Request $request)
     {
-        $request->validate([
-            'file' => 'required|max:3072',
+        $validatedData = $request->validate([
+            'file' => 'nullable',
             'nama_bantuan' => 'nullable|string',
             'no_akaun' => 'nullable|string',
             'tarikh_mohon' => 'nullable|date',
@@ -305,28 +311,31 @@ class InputController extends Controller
             'tarikh_mula' => 'nullable|date',
             'jumlah_lulus' => 'nullable|numeric',
             'status_bantuan' => 'nullable|string',
-            'catatan' => 'nullable|text',
+            'catatan' => 'nullable|string',
         ]);
-        $pemohonId = $request->input('maklumat_pemohon_id');
+        $file = $request->file('file');
 
-        $fileName = time().'.'.$request->image->extension();
+    if ($file) {
+        $fileName = time() . '.' . $file->extension();
+        $file->move(public_path('files'), $fileName);
 
-        $request->image->move(public_path('files'), $fileName);
+        $sejarahBantuan = new SejarahBantuan();
+        $sejarahBantuan->file_name = $fileName;
+        $sejarahBantuan->file_path = 'files/' . $fileName;
+        $sejarahBantuan->nama_bantuan = $validatedData['nama_bantuan'];
+        $sejarahBantuan->no_akaun = $validatedData['no_akaun'];
+        $sejarahBantuan->tarikh_mohon = $validatedData['tarikh_mohon'];
+        $sejarahBantuan->tarikh_lulus = $validatedData['tarikh_lulus'];
+        $sejarahBantuan->tarikh_mula = $validatedData['tarikh_mula'];
+        $sejarahBantuan->jumlah_lulus = $validatedData['jumlah_lulus'];
+        $sejarahBantuan->status_bantuan = $validatedData['status_bantuan'];
+        $sejarahBantuan->catatan = $validatedData['catatan'];
+        $sejarahBantuan->maklumat_pemohon_id = $request->input('maklumat_pemohon_id');
+        $sejarahBantuan->save();
+    }
 
-        $file = new SejarahBantuan();
-        $file->filename = $fileName;
-        $file->path = 'files/' . $fileName;
-        $file->nama_bantuan = $request->nama_bantuan;
-        $file->no_akaun = $request->no_akaun;
-        $file->tarikh_mohon = $request->tarikh_mohon;
-        $file->tarikh_lulus = $request->tarikh_lulus;
-        $file->tarikh_mula = $request->tarikh_mula;
-        $file->jumlah_lulus = $request->jumlah_lulus;
-        $file->status_bantuan = $request->status_bantuan;
-        $file->catatan = $request->catatan;
-        $file->maklumat_pemohon_id = $pemohonId;
-        $file->save();
+    $pemohonId = $request->input('maklumat_pemohon_id');
 
-        return view('/sejarahBantuan')->with('pemohonId', $pemohonId);
+    return view('/sejarahBantuan')->with('pemohonId', $pemohonId);
     }
 }

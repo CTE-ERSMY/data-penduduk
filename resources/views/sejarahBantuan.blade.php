@@ -28,7 +28,7 @@
                 <input type="file" name="file" id="file" class="form-control"></td>
                 <td><input type="text" name="no_akaun" class="form-control"></td>
                 <td><input type="date" name="tarikh_mohon" class="form-control"></td>
-                <td><input type="date" name="tarik_lulus" class="form-control"></td>
+                <td><input type="date" name="tarikh_lulus" class="form-control"></td>
                 <td><input type="date" name="tarikh_mula" class="form-control"></td>
             </tr>
         </tbody>
@@ -49,4 +49,5 @@
             </tr>
         </tbody>
     </table>
+    <center><button type="submit" class="btn btn-success">Selesai</button></center>
 </form>

@@ -66,13 +66,13 @@
               <td><input type="submit" value="+" class="btn btn-success"></td>  
         </tr>
     </table>
+    
 </form>
-    <form id="redirectForm" action="{{ route('newHarta.view') }}" method="GET">
-        @csrf
-        @if($pemohonId)
-        <input type="hidden" name="pemohonId" value="{{ $pemohonId }}">
-     @endif
-    </form>
+<form id="redirectForm" action="{{ route('newHarta.view', ['pemohonId' => $pemohonId]) }}" method="GET">
+    @csrf
+    <input type="hidden" name="pemohonId" value="{{ $pemohonId }}">
+</form>
+
     <center><button id="redirectToHarta" class="btn btn-success">Lanjut</button></center>
 
 @if(isset($allWarisData) && count($allWarisData) > 0)

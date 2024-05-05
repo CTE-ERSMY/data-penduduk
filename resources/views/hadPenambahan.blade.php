@@ -12,6 +12,9 @@
 <h5>Had Penambahan</h5>
     <form action="{{route('hadPenambahan.new')}}" method="POST">
     @csrf
+    @if(isset($pemohonId))
+        <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
+        @endif
     <table class="table table-border">
         <thead>
             <tr>

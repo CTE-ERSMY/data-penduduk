@@ -74,11 +74,11 @@ class DisplayController extends Controller
     }
     public function sejarahDetails($id)
     {
-        $pemohon = MaklumatPemohon::with('sejarahBantuan')->find($id);
+        $pemohon = MaklumatPemohon::with('SejarahBantuan')->find($id);
 
         if(!$pemohon) {
             abort(404);
         }
-        return view('sejarahDetails', ['pemohon' => $pemohon, 'sejarahBantuan' => $pemohon->sejarahBantuan]);
+        return view('sejarahDetails', ['pemohon' => $pemohon, 'sejarahBantuan' => $pemohon->SejarahBantuan]);
     }
 }

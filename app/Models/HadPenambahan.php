@@ -31,5 +31,4 @@ class HadPenambahan extends Model
     public function pemohon()
     {
         return $this->belongsTo(MaklumatPemohon::class);
-    }
-}
+    }}

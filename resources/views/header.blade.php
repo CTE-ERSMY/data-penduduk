@@ -10,7 +10,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
       * {
-        font-family:'Montserrat';
+        font-family:'Arial';
         font-weight: 300;
         line-height: 1.5em;
         letter-spacing: 0.8px;
@@ -30,6 +30,7 @@
    <aside class="sidenav">
      <div class="sidenav__close-icon">
        <i class="fas fa-times sidenav__brand-close"></i>
+
      </div>
      <ul class="sidenav__list" >
 

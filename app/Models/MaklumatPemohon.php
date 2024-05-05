@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Waris;
 use App\Models\Pendapatan;
 use App\Models\Perbelanjaan;
+use App\Models\SejarahBantuan;
 use App\Models\MaklumatPasangan;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

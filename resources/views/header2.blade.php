@@ -12,10 +12,10 @@
     <main class="main">
     <div class="container">
     <div class="navigation-bar">
-        <a href="{{route('pemohon.details', ['id' => $pemohon->id])}}" class="tab">Profil Peribadi</a>
-        <a href="{{route('kewangan.details', ['id' => $pemohon->id])}}" class="tab">Kewangan</a>
-        <a href="{{route('waris.details', ['id' => $pemohon->id])}}" class="tab active">Tanggungan dan Waris</a>
-        <a href="{{route('harta.details', ['id' => $pemohon->id])}}" class="tab">Harta</a>
-        <a href="{{route('kifayah.details', ['id' => $pemohon->id])}}" class="tab">Had Kifayah</a>   
-        <a href="{{route('sejarah.details', ['id' => $pemohon->id])}}" class="tab">Sejarah Bantuan</a>
+        <a href="{{ route('pemohon.details', ['id' => $pemohon->id]) }}" class="tab {{ request()->routeIs('pemohon.details') ? 'active' : '' }}">Profil Peribadi</a>
+    <a href="{{ route('kewangan.details', ['id' => $pemohon->id]) }}" class="tab {{ request()->routeIs('kewangan.details') ? 'active' : '' }}">Kewangan</a>
+    <a href="{{ route('waris.details', ['id' => $pemohon->id]) }}" class="tab {{ request()->routeIs('waris.details') ? 'active' : '' }}">Tanggungan dan Waris</a>
+    <a href="{{ route('harta.details', ['id' => $pemohon->id]) }}" class="tab {{ request()->routeIs('harta.details') ? 'active' : '' }}">Harta</a>
+    <a href="{{ route('kifayah.details', ['id' => $pemohon->id]) }}" class="tab {{ request()->routeIs('kifayah.details') ? 'active' : '' }}">Had Kifayah</a>   
+    <a href="{{ route('sejarah.details', ['id' => $pemohon->id]) }}" class="tab {{ request()->routeIs('sejarah.details') ? 'active' : '' }}">Sejarah Bantuan</a>
     </div>

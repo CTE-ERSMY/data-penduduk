@@ -19,7 +19,7 @@
             <td><select name="hubungan[]" class="form-control" id="hubungan" required>
               <option selected disabled>Sila Pilih</option>
               <option value="Anak">Anak</option>
-              <option value="Anak Tiri">Anak Tiri</option>    
+              <option value="Anak Tiri">Anak Tiri</duption>    
               <option value="Anak Angkat">Anak Angkat</option>
               <option value="Anak Saudara">Anak Saudara</option>
               <option value="Isteri 1">Isteri 1</option>

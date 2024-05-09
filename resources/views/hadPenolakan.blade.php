@@ -28,61 +28,61 @@
             <tr>
                 <td>Kereta (RM 30,000.00 dan ke atas)</td>
                 <td>300</td>
-                <td><input type="number" min="0" name="int_kereta_mahal" id="int_kereta_mahal" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_kereta_mahal" id="int_kereta_mahal" class="form-control" required></td>
                 <td><input type="number" min="0" name="kereta_mahal" id="kereta_mahal" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Kereta (RM 30,000.00 dan ke bawah)</td>
                 <td>100</td>
-                <td><input type="number" min="0" name="int_kereta_murah" id="int_kereta_murah" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_kereta_murah" id="int_kereta_murah" class="form-control" required></td>
                 <td><input type="number" min="0" name="kereta_murah" id="kereta_murah" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Telefon Bimbit</td>
                 <td>50</td>
-                <td><input type="number" min="0" name="int_telefon_bimbit" id="int_telefon_bimbit" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_telefon_bimbit" id="int_telefon_bimbit" class="form-control" required></td>
                 <td><input type="number" min="0" name="telefon_bimbit" id="telefon_bimbit" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Barang Kemas (Emas) Melebihi Keperluan</td>
                 <td>100</td>
-                <td><input type="number" min="0" name="int_emas" id="int_emas" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_emas" id="int_emas" class="form-control" required></td>
                 <td><input type="number" min="0" name="emas" id="emas" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Astro</td>
                 <td>50</td>
-                <td><input type="number" min="0" name="int_astro" id="int_astro" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_astro" id="int_astro" class="form-control" required></td>
                 <td><input type="number" min="0" name="astro" id="astro" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Alat Penghawa Dingin</td>
                 <td>50</td>
-                <td><input type="number" min="0" name="int_aircond" id="int_aircond" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_aircond" id="int_aircond" class="form-control" required></td>
                 <td><input type="number" min="0" name="aircond" id="aircond" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>VCD / DVD / Radio Hi-Fi</td>
                 <td>50</td>
-                <td><input type="number" min="0" name="int_radio" id="int_radio" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_radio" id="int_radio" class="form-control" required></td>
                 <td><input type="number" min="0" name="radio" id="radio" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Wang Simpanan</td>
                 <td>0</td>
-                <td><input type="number" min="0" name="int_simpanan" id="int_simpanan" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_simpanan" id="int_simpanan" class="form-control" required></td>
                 <td><input type="number" min="0" name="simpanan" id="simpanan" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Home Theater</td>
                 <td>50</td>
-                <td><input type="number" min="0" name="int_home_theater" id="int_home_theater" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_home_theater" id="int_home_theater" class="form-control" required></td>
                 <td><input type="number" min="0" name="home_theater" id="home_theater" class="form-control" readonly></td>
             </tr>
             <tr>
                 <td>Perokok</td>
                 <td>50</td>
-                <td><input type="number" min="0" name="int_perokok" id="int_perokok" class="form-control"></td>
+                <td><input type="number" value="0" min="0" name="int_perokok" id="int_perokok" class="form-control" required></td>
                 <td><input type="number" min="0" name="perokok" id="perokok" class="form-control" readonly></td>
             </tr>
             <tr>

@@ -441,10 +441,15 @@ class EditController extends Controller
     if ($request->hasFile('file')) {
         $file = $request->file('file');
         $file_name = time() . '.' . $file->getClientOriginalExtension();
-        $file_path = $file->storeAs('files', $file_name); // Store the file in public/files directory
+
+        // Move the uploaded file to the public/files directory
+        $file->move(public_path('files'), $file_name);
+
+        // Update the file-related fields in the database
         $sejarahBantuan->file_name = $file_name;
-        $sejarahBantuan->file_path = 'files/' . $file_name; // Ensure correct file path
+        $sejarahBantuan->file_path = '/files/' . $file_name; // Assuming files are stored in public/files
     }
+
 
     // Update other fields with validated data
     $sejarahBantuan->fill($validatedData)->save();

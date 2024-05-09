@@ -11,15 +11,16 @@
 <body>
 <main class="main">
     <div class="container"> 
-    <div class="navigation-bar">
-        <a class="tab ">Pemohon</a>
-        <a href="{{route('newPasangan.view')}}" class="tab ">Pasangan</a>
-        <a href="{{route('pendapatan.view')}}" class="tab ">Pendapatan</a>
-        <a href="{{route('perbelanjaan.view')}}" class="tab ">Perbelanjaan</a>
-        <a href="{{route('newWaris.view')}}" class="tab ">Tanggungan dan Waris</a>
-        <a class="tab ">Harta</a>
-        <a href="{{route('hadTanggungan.view')}}" class="tab">Had Tanggungan</a>
-        <a href="{{route('hadPenambahan.view')}}" class="tab">Had Penambahan</a>
-        <a href="{{route('hadPenolakan.view')}}" class="tab">Had Penolakan</a>
-        <a href="{{route('sejarahBantuan.view')}}" class="tab">Sejarah Bantuan</a>
-    </div>
+        <div class="navigation-bar">
+            <a class="tab {{ request()->is('newPemohon.view') ? 'active' : '' }}">Pemohon</a>
+            <a class="tab {{ request()->is('newPasangan.view') ? 'active' : '' }}">Pasangan</a>
+            <a class="tab {{ request()->is('pendapatan.view') ? 'active' : '' }}">Pendapatan</a>
+            <a class="tab {{ request()->is('perbelanjaan.view') ? 'active' : '' }}">Perbelanjaan</a>
+            <a class="tab {{ request()->is('newWaris.view') ? 'active' : '' }}">Tanggungan dan Waris</a>
+            <a class="tab {{ request()->is('newHarta.view') ? 'active' : '' }}">Harta</a>
+            <a class="tab {{ request()->is('hadTanggungan.view') ? 'active' : '' }}">Had Tanggungan</a>
+            <a class="tab {{ request()->is('hadPenambahan.view') ? 'active' : '' }}">Had Penambahan</a>
+            <a class="tab {{ request()->is('hadPenolakan.view') ? 'active' : '' }}">Had Penolakan</a>
+            <a class="tab {{ request()->is('sejarahBantuan.view') ? 'active' : '' }}">Sejarah Bantuan</a>
+        </div>
+        

@@ -10,25 +10,25 @@
         <tbody>
             <tr>
                 <th>Status Kediaman</th>
-                <td><input type="text" value="{{ old('status_kediaman')}}" name="status_kediaman" class="form-control"></td>
+                <td><input type="text" value="{{ old('status_kediaman')}}" name="status_kediaman" class="form-control" required></td>
             </tr><tr>
                 <th>Jenis Kediaman</th>
-                <td><input type="text" value="{{ old('jenis_kediaman')}}" name="jenis_kediaman" class="form-control"></td>
+                <td><input type="text" value="{{ old('jenis_kediaman')}}" name="jenis_kediaman" class="form-control" required></td>
             </tr><tr>
                 <th>Kemudahan Asas</th>
-                <td><input type="text" value="{{ old('kemudahan')}}" name="kemudahan" class="form-control"></td>
+                <td><input type="text" value="{{ old('kemudahan')}}" name="kemudahan" class="form-control" required></td>
             </tr><tr>
                 <th>Kuantiti Bilik</th>
-                <td><input type="number" value="{{ old('bilik')}}" name="bilik" class="date form-control"></td>
+                <td><input type="number" value="{{ old('bilik')}}" name="bilik" class="date form-control" required></td>
             </tr><tr>
                 <th>Kemudahan Tambahan</th>
-                <td><input type="text" value="{{ old('kemudahan_tambahan')}}" name="kemudahan_tambahan" class="form-control"></td>
+                <td><input type="text" value="{{ old('kemudahan_tambahan')}}" name="kemudahan_tambahan" class="form-control" required></td>
             </tr><tr>
                 <th>Anggaran Nilai Semasa Kediaman</th>
-                <td> <input type="number" value="{{ old('nilai_kediaman')}}" name="nilai_kediaman" class="form-control"></td>
+                <td> <input type="number" value="{{ old('nilai_kediaman')}}" name="nilai_kediaman" class="form-control" required></td>
             </tr><tr>
                 <th>Bayaran Bulanan</th>
-                <td><input type="number" value="{{ old('bulanan')}}" name="bulanan" class="form-control"></td> 
+                <td><input type="number" value="{{ old('bulanan')}}" name="bulanan" class="form-control" required></td> 
             </tr>
         </tbody> 
     </table>

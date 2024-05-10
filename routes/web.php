@@ -50,6 +50,7 @@ Route::get('/warisDetails/{id}', [DisplayController::class, 'warisDetails'])->na
 Route::get('/hartaDetails/{id}', [DisplayController::class, 'hartaDetails'])->name('harta.details');
 Route::get('/kifayahDetails/{id}', [DisplayController::class, 'kifayahDetails'])->name('kifayah.details');
 Route::get('/sejarahDetails/{id}', [DisplayController::class, 'sejarahDetails'])->name('sejarah.details');
+Route::get('/allDetails/{id}', [DisplayController::class, 'allDetails'])->name('all.details');
 Route::delete('/pemohonDelete/{id}', [EditController::class, 'pemohonDelete'])->name('pemohon.delete');
 Route::get('/pemohonEView{id}', [EditController::class, 'pemohonEView'])->name('pemohon.Eview');
 Route::post('/pemohonEdit{id}', [EditController::class, 'pemohonEdit'])->name('pemohon.edit');

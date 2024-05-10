@@ -36,7 +36,8 @@
             </tr>    
         </tbody>    
     </table>
-    <center><h4><a href="{{ route('pemohon.Eview', ['id' => $pemohon->id]) }}">Edit Pemohon</a></h4></center>
+    <center><h4><a href="{{ route('pemohon.Eview', ['id' => $pemohon->id]) }}">Edit Pemohon</a></h4>
+        <h4><a href="{{ route('all.details', ['id' => $pemohon->id]) }}">Rumusan Maklumat</a></h4></center>
     <br>
     @if ($pasangan)
     <table class="table table-striped">

@@ -90,4 +90,29 @@ class DisplayController extends Controller
         }
         return view('sejarahDetails', ['pemohon' => $pemohon, 'sejarahBantuan' => $pemohon->SejarahBantuan]);
     }
+    public function alldetails($id)
+    {
+        $pemohon = MaklumatPemohon::with(['pasangan', 'perbelanjaan', 'harta', 'waris', 'hadTanggungan', 
+        'hadPenolakan', 'hadPenambahan', 'pendapatan', 'SejarahBantuan'])->find($id);
+
+        if(!$pemohon) {
+            abort(404);
+        }
+        $bilTanggungan = $pemohon->hadTanggungan->count();
+        $totalJumlah = $pemohon->hadTanggungan->sum('jumlah_tanggungan');
+        return view('allDetails', [
+        'pemohon' => $pemohon, 
+        'pasangan' => $pemohon->pasangan,
+        'pendapatan' => $pemohon->pendapatan,
+        'perbelanjaan' => $pemohon->perbelanjaan,
+        'harta' => $pemohon->harta,
+        'waris' => $pemohon->waris,
+        'hadTanggungan' => $pemohon->hadTanggungan,
+        'hadPenolakan' => $pemohon->hadPenolakan, 
+        'hadPenambahan' => $pemohon->hadPenambahan,
+        'sejarahBantuan' => $pemohon->SejarahBantuan,
+        'totalJumlah' => $totalJumlah,
+        'bilTanggungan' => $bilTanggungan]);
+    }
+
 }

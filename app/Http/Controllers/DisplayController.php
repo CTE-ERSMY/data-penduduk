@@ -65,12 +65,21 @@ class DisplayController extends Controller
     }
     public function kifayahDetails($id)
     {
-        $pemohon = MaklumatPemohon::with(['hadTanggungan', 'hadPenolakan', 'hadPenambahan'])->find($id);
+        $pemohon = MaklumatPemohon::with(['hadTanggungan', 'hadPenolakan', 'hadPenambahan', 'pendapatan'])->find($id);
 
         if(!$pemohon) {
             abort(404);
         }
-        return view('kifayahDetails', ['pemohon' => $pemohon, 'hadTanggungan' => $pemohon->hadTanggungan, 'hadPenolakan' => $pemohon->hadPenolakan, 'hadPenambahan' => $pemohon->hadPenambahan]);
+        $bilTanggungan = $pemohon->hadTanggungan->count();
+        $totalJumlah = $pemohon->hadTanggungan->sum('jumlah_tanggungan');
+        return view('kifayahDetails', [
+        'pemohon' => $pemohon, 
+        'hadTanggungan' => $pemohon->hadTanggungan,
+        'hadPenolakan' => $pemohon->hadPenolakan, 
+        'hadPenambahan' => $pemohon->hadPenambahan,
+        'pendapatan' => $pemohon->pendapatan,
+        'totalJumlah' => $totalJumlah,
+        'bilTanggungan' => $bilTanggungan]);
     }
     public function sejarahDetails($id)
     {

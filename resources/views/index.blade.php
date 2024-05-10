@@ -15,7 +15,7 @@
            </div>
            <div class="overviewcard">
              <div class="overviewcard__icon">Purata Pendapatan  -  <i class="fas fa-money-bill" style="font-size: 25px"></i>&nbsp; </div>
-             <div class="overviewcard__info">0</div>
+             <div class="overviewcard__info">RM {{ number_format($avgGaji, 2) }} </div>
            </div>
          </div>
      

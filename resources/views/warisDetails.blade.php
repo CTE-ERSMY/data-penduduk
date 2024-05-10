@@ -7,7 +7,7 @@
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Bil</th>
+            <th style="width: 5%">Bil</th>
             <th>Nama</th>
             <th>No. Kad Pengenalan</th>
             <th>Umur (tahun)</th>
@@ -22,7 +22,7 @@
     @if ($warisData->status == 'Sekolah')
     <tbody>
             <tr>
-                <td>{{ $count++ }} </td>
+                <td style="width: 5%">{{ $count++ }} </td>
                 <td>{{ $warisData->nama }}</td>
                 <td>{{ $warisData->ic }} </td>
                 <td>{{ $warisData->umur }} </td>
@@ -46,7 +46,7 @@ $count2=1;
 <table class="table table-striped">
     <thead>
         <tr>
-            <th>Bil</th>
+            <th style="width: 5%">Bil</th>
             <th>Nama</th>
             <th>No. Kad Pengenalan</th>
             <th>Umur (tahun)</th>
@@ -61,7 +61,7 @@ $count2=1;
     @if ($warisData->status == 'Bekerja' || $warisData->status == 'Tidak Bekerja')
     <tbody>
             <tr>
-                <td>{{ $count2++ }} </td>
+                <td style="width: 5%">{{ $count2++ }} </td>
                 <td>{{ $warisData->nama }}</td>
                 <td>{{ $warisData->ic }} </td>
                 <td>{{ $warisData->umur }} </td>

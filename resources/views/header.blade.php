@@ -16,7 +16,7 @@
         letter-spacing: 0.8px;
       }
     </style>
-    <title>Menu Utama</title>
+    <title>Data Penduduk Kota Tinggi</title>
 </head>
 <div class="grid-container">
   <div class="menu-icon">

@@ -13,6 +13,35 @@
     @php
     $count=1;
     @endphp
+    <br>
+<table class="table table-bordered">
+    <tr>
+        <td>Nama</td>
+        <td>{{ $pemohon->nama }}</td>
+        <td>Pendapatan Pemohon (RM)</td>
+        <td>{{ $pendapatan->gaji}} </td>
+    </tr><tr>
+        <td>No. Kad Pengenalan</td>
+        <td>{{ $pemohon->ic }}</td>
+        <td>Pendapatan Pasangan (RM)</td>
+        <td>{{ $pendapatan->gaji_psgn }} </td>
+    </tr><tr>
+        <td>Bilangan Tanggungan</td>
+        <td>{{ $bilTanggungan}} </td>
+        <td>Sumbangan anak (RM)</td>
+        <td>{{ $pendapatan->sumbangan_anak}} </td>
+    </tr><tr>
+        <td></td>
+        <td></td>
+        <td>Lain-lain Sumbangan (RM)</td>
+        <td>{{ $pendapatan->sumbangan_saudara}} </td>
+    </tr><tr>
+        <td></td>
+        <td></td>
+        <td><b>Jumlah Keseluruhan</b></td>
+        <td>{{ $pendapatan->sumbangan_saudara + $pendapatan->sumbangan_anak + $pendapatan->gaji + $pendapatan->gaji_psgn }}</td>
+    </tr>
+</table>
 <h5>Had Tanggungan</h5>
     <table class="table table-striped">
         <thead>
@@ -25,14 +54,21 @@
         </thead>
         @foreach ($hadTanggungan as $tanggungan)
         <tbody>
-            <tr>
+            <tr>    
                 <td style="width:5%">{{ $count++ }}</td>
-                <td>{{ $tanggungan->butiran_tanggungan }}</td>
-                <td>{{ $tanggungan->jumlah_tanggungan }} </td>
-                <td><a href="{{ route('hadTanggungan.Eview', $tanggungan->id) }}"><button type="button" class="btn btn-info">Edit</button></a></td>
+                <td style="width:40%">{{ $tanggungan->butiran_tanggungan }}</td>
+                <td style="width:40%">{{ $tanggungan->jumlah_tanggungan }} </td>
+                <td style="width:15%"><a href="{{ route('hadTanggungan.Eview', $tanggungan->id) }}"><button type="button" class="btn btn-info">Edit</button></a></td>
+            </tr>
+            @endforeach
+            <tr>
+                <td style="width:5%">&nbsp;</td>
+                <td>Jumlah Keseluruhan</td>
+                <td>{{ $totalJumlah }} </td>
+                <td></td>
             </tr>
         </tbody>
-        @endforeach
+        
         @endif
     </table>
 
@@ -119,6 +155,13 @@
                 <td>{{ $hadPenolakan->int_perokok }} </td>
                 <td>{{ $hadPenolakan->perokok}} </td>
             </tr>
+            <tr>
+                <td style="width:5%">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <th>Jumlah Keseluruhan</th>
+                <th>RM {{ $hadPenolakan->kereta_mahal + $hadPenolakan->kereta_murah + $hadPenolakan->telefon_bimbit + $hadPenolakan->emas + $hadPenolakan->astro + $hadPenolakan->aircond + $hadPenolakan->radio + $hadPenolakan->simpanan + $hadPenolakan->home_theater + $hadPenolakan->perokok }}</th>
+            </tr>
         </tbody>
     </table>
     @endif
@@ -186,8 +229,30 @@
                 <td>{{ $hadPenambahan->int_ibu_tunggal }} </td>
                 <td>{{ $hadPenambahan->ibu_tunggal}} </td>
             </tr>
+            <tr>
+                <td style="width:5%">&nbsp;</td>
+                <td>&nbsp;</td>
+                <td>&nbsp;</td>
+                <th>Jumlah Keseluruhan</th>
+                <th>RM {{ $hadPenambahan->ibu_tunggal + $hadPenambahan->kos_kronik + $hadPenambahan->cacat_semulajadi + $hadPenambahan->cacat_mendatang + $hadPenambahan->ibu_bapa + $hadPenambahan->ibu_tinggal + $hadPenambahan->masalah_keluarga }}</th>
+            </tr>
         </tbody>
     </table>
     @endif
     <center><h4><a href="{{ route('hadPenambahan.Eview', ['id' => $hadPenambahan->id]) }}">Edit Had Penambahan</a></h4></center>
+    <h5>KEPUTUSAN</h5>
+    <table class="table table-bordered">
+        <tr>
+            <td>JUMLAH HAD KIFAYAH (HAD TANGGUNGAN + HAD PENAMBAHAN - HAD PENOLAKAN)</td>
+            <td>RM {{ $totalJumlah 
+            + ( $hadPenambahan->ibu_tunggal + $hadPenambahan->kos_kronik + $hadPenambahan->cacat_semulajadi + $hadPenambahan->cacat_mendatang + $hadPenambahan->ibu_bapa + $hadPenambahan->ibu_tinggal + $hadPenambahan->masalah_keluarga ) 
+            - ( $hadPenolakan->kereta_mahal + $hadPenolakan->kereta_murah + $hadPenolakan->telefon_bimbit + $hadPenolakan->emas + $hadPenolakan->astro + $hadPenolakan->aircond + $hadPenolakan->radio + $hadPenolakan->simpanan + $hadPenolakan->home_theater + $hadPenolakan->perokok ) }}</td>
+            </tr><tr>
+            <td>PENDAPATAN - JUMLAH HAD KIFAYAH</td>
+            <td>RM {{ ( $pendapatan->sumbangan_saudara + $pendapatan->sumbangan_anak + $pendapatan->gaji + $pendapatan->gaji_psgn ) - 
+                ( $totalJumlah 
+                    + ( $hadPenambahan->ibu_tunggal + $hadPenambahan->kos_kronik + $hadPenambahan->cacat_semulajadi + $hadPenambahan->cacat_mendatang + $hadPenambahan->ibu_bapa + $hadPenambahan->ibu_tinggal + $hadPenambahan->masalah_keluarga ) 
+                    - ( $hadPenolakan->kereta_mahal + $hadPenolakan->kereta_murah + $hadPenolakan->telefon_bimbit + $hadPenolakan->emas + $hadPenolakan->astro + $hadPenolakan->aircond + $hadPenolakan->radio + $hadPenolakan->simpanan + $hadPenolakan->home_theater + $hadPenolakan->perokok )) }}</td>
+        </tr>
+    </table>
 </main>

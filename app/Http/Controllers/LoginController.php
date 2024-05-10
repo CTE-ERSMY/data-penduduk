@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pendapatan;
 use Illuminate\Http\Request;
 use App\Models\MaklumatPemohon;
 use Illuminate\Support\Facades\Auth;
@@ -31,8 +32,12 @@ class LoginController extends Controller
     {
         $totalPemohon = MaklumatPemohon::count();
         $totalUser = User::count();
+        $avgGaji = Pendapatan::avg('gaji');
 
-         return view('index', ['totalPemohon' => $totalPemohon, 'totalUser' => $totalUser]);
+         return view('index', [
+            'totalPemohon' => $totalPemohon, 
+             'totalUser' => $totalUser,
+            'avgGaji' => $avgGaji]);
     }
     public function logout(Request $request)
     {

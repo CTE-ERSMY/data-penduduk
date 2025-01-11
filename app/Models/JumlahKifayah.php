@@ -12,6 +12,7 @@ class JumlahKifayah extends Model
     protected $table = 'jumlah_kifayah';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'jumlah_tanggungan',
         'jumlah_penambahan',
         'jumlah_penolakan',

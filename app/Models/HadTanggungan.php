@@ -12,6 +12,7 @@ class HadTanggungan extends Model
     protected $table = 'had_tanggungan';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'butiran_tanggungan',
         'jumlah_tanggungan',
     ];

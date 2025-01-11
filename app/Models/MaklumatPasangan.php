@@ -13,6 +13,7 @@ class MaklumatPasangan extends Model
     protected $table = 'maklumat_pasangan';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'nama',
         'ic',
         'jantina',

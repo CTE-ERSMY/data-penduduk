@@ -12,6 +12,7 @@ class HadPenambahan extends Model
     protected $table = 'had_penambahan';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'int_kos_kronik',
         'int_cacat_semulajadi',
         'int_cacat_mendatang',

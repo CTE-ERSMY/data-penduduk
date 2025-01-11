@@ -151,7 +151,12 @@ body {
   /* .card:first-child {
     height: 485px;
   } */
-  
+  .modal {
+    z-index: 1055 !important;
+}
+.modal-backdrop {
+    z-index: 1040 !important;
+}
   .card:nth-child(2) {
     height: 200px;
   }

@@ -1,10 +1,10 @@
-@include('header3')
+@extends('layout.new')
+
+@section('form-content')
     <h5>Maklumat Pasangan</h5>
-        <form action="{{ route('newPasangan.new')}}" method="POST">
+        <form action="{{ route('pemohon.baru')}}" method="POST">
             @csrf
-             @if(isset($pemohonId))
-            <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
-            @endif
+            <input type="hidden" name="step" value="2">
             <table class="table table-border">
             <tbody>
                 <tr>
@@ -23,9 +23,9 @@
                     <td><input type="date" name="tarikh_lahir" id="tarikh_lahir" class="form-control" required></td>
                 </tr><tr>
                     <th>Status Perkahwinan</th>
-                    <td><select name="status" id="status" class="form-control" readonly required>
+                    <td><select name="status" id="status" class="form-control" required>
                             <option selected disabled>Pilih status</option>
-                            <option selected value="Kahwin">Kahwin</option>
+                            <option value="Kahwin">Kahwin</option>
                             <option value="Bujang">Bujang</option>    
                             <option value="Duda(Kematian Isteri)">Duda (Kematian Isteri)</option>
                             <option value="Duda(Bercerai)">Duda (Bercerai)</option>
@@ -82,4 +82,4 @@
             @endif
         </div>
     </div>
-</body>
+@endsection

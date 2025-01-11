@@ -1,9 +1,6 @@
-@include('header')
-<body>
+@extends('header')
 
-       <main class="main">
-         
-     
+@section('content')
          <div class="main-overview">
            <div class="overviewcard">
              <div class="overviewcard__icon">Jumlah Admin  -  <i class="fas fa-user-tie" style="font-size: 25px"></i></div>
@@ -22,11 +19,6 @@
          <div class="main-cards">
 
          </div>
-       </main>
-     
-       <footer class="footer">
-         <div class="footer__copyright">&copy; 2024 Data Penduduk Kota Tinggi</div>
-         <div class="footer__signature"></div>
-       </footer>
-     </div>
-</body>
+    
+@endsection
+

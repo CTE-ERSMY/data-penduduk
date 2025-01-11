@@ -13,6 +13,7 @@ class Perbelanjaan extends Model
     protected $table = 'perbelanjaan';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'makan',
         'perubatan',
         'bil',

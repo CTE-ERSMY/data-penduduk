@@ -12,6 +12,7 @@ class SejarahBantuan extends Model
     protected $table = 'sejarah_bantuan';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'file_name',
         'file_path',
         'nama_bantuan',

@@ -13,6 +13,7 @@ class Waris extends Model
     protected $table = 'waris';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'nama',
         'ic',
         'umur',

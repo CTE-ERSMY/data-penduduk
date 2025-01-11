@@ -13,6 +13,7 @@ class Pendapatan extends Model
     protected $table = 'pendapatan';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'jawatan',
         'gaji',
         'majikan',

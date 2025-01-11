@@ -12,6 +12,7 @@ class HadPenolakan extends Model
     protected $table = 'had_penolakan';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'int_kereta_mahal',
         'int_kereta_murah',
         'int_telefon_bimbit',

@@ -10,6 +10,7 @@ use App\Models\Perbelanjaan;
 use Illuminate\Http\Request;
 use App\Models\HadPenambahan;
 use App\Models\HadTanggungan;
+use App\Models\JumlahKifayah;
 use App\Models\SejarahBantuan;
 use App\Models\MaklumatPemohon;
 use App\Models\MaklumatPasangan;
@@ -25,25 +26,53 @@ class InputController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|string',
-            'ic' => 'required|numeric|digits:12|unique:maklumat_pemohon',
-            'jantina' => 'required|in:Lelaki,Wanita',
-            'tarikh_lahir' => 'required|date',
-            'status' => 'required|string',
-            'mental' => 'required|in:Waras,Tidak Waras',
-            'islam' => 'required|in:Baik,Kurang Baik',
-            'fizikal' => 'required|string',
-            'alamat' => 'required|string',
-            'poskod' => 'required|numeric',
+            'ic' => 'required|numeric|digits:12',
+            'jantina' => 'nullable|in:Lelaki,Wanita',
+            'tarikh_lahir' => 'nullable|date',
+            'status' => 'nullable|string',
+            'mental' => 'nullable|in:Waras,Tidak Waras',
+            'islam' => 'nullable|in:Baik,Kurang Baik',
+            'fizikal' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'poskod' => 'nullable|numeric',
             'bandar' => 'nullable|string',
             'nombor_rumah' => 'nullable|numeric',
-            'nombor_bimbit' => 'required|numeric',
+            'nombor_bimbit' => 'nullable|numeric',
         ]);
 
         $pemohon = MaklumatPemohon::create($validatedData);
 
-        $request->session()->flash('success', 'Data inserted successfully');
-
-        return view('/newPasangan')->with('pemohonId', $pemohon->id);
+        $excludedStatuses = [
+            'Bujang',
+            'Duda(Kematian Isteri)',
+            'Duda(Bercerai)',
+            'Janda(Kematian Suami)',
+            'Janda(Bercerai)',
+        ];
+    
+        // Only create MaklumatPasangan if the status is not excluded
+        if (!in_array($validatedData['status'], $excludedStatuses)) {
+            MaklumatPasangan::create([
+                'maklumat_pemohon_id' => $pemohon->id,
+                // Add other default values if required
+            ]);
+        }
+    
+        // Create related records for other models
+        Pendapatan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        Perbelanjaan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        Harta::create(['maklumat_pemohon_id' => $pemohon->id]);
+        SejarahBantuan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        HadTanggungan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        HadPenambahan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        HadPenolakan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        JumlahKifayah::create(['maklumat_pemohon_id' => $pemohon->id]);
+    
+        // Set a success message
+        $request->session()->flash('success', 'Data and related records inserted successfully');
+    
+        // Redirect to the pemohonDetails page with the new record's ID
+        return redirect()->route('pemohon.details', ['id' => $pemohon->id]);
     }
     public function pasanganView()
     {
@@ -52,19 +81,19 @@ class InputController extends Controller
     public function pasanganNew(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'required|string',
-            'ic' => 'required|numeric|digits:12|unique:maklumat_pasangan',
-            'jantina' => 'required|in:Lelaki,Wanita',
-            'tarikh_lahir' => 'required|date',
-            'status' => 'required|string',
-            'mental' => 'required|in:Waras,Tidak Waras',
-            'islam' => 'required|in:Baik,Kurang Baik',
-            'fizikal' => 'required|string',
-            'alamat' => 'required|string',
-            'poskod' => 'required|numeric',
+            'nama' => 'nullable|string',
+            'ic' => 'nullable|numeric|digits:12|unique:maklumat_pasangan',
+            'jantina' => 'nullable|in:Lelaki,Wanita',
+            'tarikh_lahir' => 'nullable|date',
+            'status' => 'nullable|string',
+            'mental' => 'nullable|in:Waras,Tidak Waras',
+            'islam' => 'nullable|in:Baik,Kurang Baik',
+            'fizikal' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'poskod' => 'nullable|numeric',
             'bandar' => 'nullable|string',
             'nombor_rumah' => 'nullable|numeric',
-            'nombor_bimbit' => 'required|numeric',
+            'nombor_bimbit' => 'nullable|numeric',
         ]);
         $pemohonId = $request->input('maklumat_pemohon_id');
 
@@ -73,7 +102,7 @@ class InputController extends Controller
         
         $dataPasangan->save();
 
-        return view('/pendapatan')->with('pemohonId', $pemohonId);
+        return redirect()->back()->with('success', 'Maklumat Pasangan berjaya ditambah!');
     }
     public function pendapatanView()
     {
@@ -82,9 +111,9 @@ class InputController extends Controller
     public function pendapatanNew(Request $request)
     {
         $validatedData = $request->validate([
-            'jawatan' => 'required|string',
-            'gaji' => 'required|numeric|min:0',
-            'majikan' => 'required|string',
+            'jawatan' => 'nullable|string',
+            'gaji' => 'nullable|numeric|min:0',
+            'majikan' => 'nullable|string',
             'jawatan_psgn' => 'nullable|string',
             'gaji_psgn' => 'nullable|numeric|min:0',
             'majikan_psgn' => 'nullable|string',
@@ -110,13 +139,13 @@ class InputController extends Controller
     public function perbelanjaanNew(Request $request)
     {
         $validatedData = $request->validate([
-            'makan' => 'required|numeric|min:0',
-            'perubatan' => 'required|numeric|min:0',
-            'bil' => 'required|numeric|min:0',
-            'pengangkutan' => 'required|numeric|min:0',
-            'sewa_rumah' => 'required|numeric|min:0',
-            'persekolahan' => 'required|numeric|min:0',
-            'lain' => 'required|numeric|min:0',
+            'makan' => 'nullable|numeric|min:0',
+            'perubatan' => 'nullable|numeric|min:0',
+            'bil' => 'nullable|numeric|min:0',
+            'pengangkutan' => 'nullable|numeric|min:0',
+            'sewa_rumah' => 'nullable|numeric|min:0',
+            'persekolahan' => 'nullable|numeric|min:0',
+            'lain' => 'nullable|numeric|min:0',
         ]);
         $pemohonId = $request->input('maklumat_pemohon_id');
 
@@ -134,15 +163,15 @@ class InputController extends Controller
     public function warisNew(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'required|string',
-            'ic' => 'required|numeric|digits:12|unique:waris',
-            'umur' => 'required|numeric|min:0',
-            'hubungan' => 'required|string',
-            'status' => 'required|string',
-            'kerja' => 'required|string',
-            'fizikal' => 'required|string',
-            'mental' => 'required|in:Waras,Tidak Waras',
-            'pendapatan' => 'required|numeric|min:0',
+            'nama' => 'nullable|string',
+            'ic' => 'nullable|numeric|digits:12|unique:waris',
+            'umur' => 'nullable|numeric|min:0',
+            'hubungan' => 'nullable|string',
+            'status' => 'nullable|string',
+            'kerja' => 'nullable|string',
+            'fizikal' => 'nullable|string',
+            'mental' => 'nullable|in:Waras,Tidak Waras',
+            'pendapatan' => 'nullable|numeric|min:0',
         ]);
         // Initialize an array to store all entered data
         $pemohonId = $request->input('maklumat_pemohon_id');
@@ -173,23 +202,23 @@ class InputController extends Controller
     public function hartaNew (Request $request)
     {
         $validatedData = $request->validate([
-            'status_kediaman' => 'required|string',
-            'jenis_kediaman' => 'required|string',
-            'kemudahan' => 'required|string',
-            'bilik' => 'required|numeric|min:0',
+            'status_kediaman' => 'nullable|string',
+            'jenis_kediaman' => 'nullable|string',
+            'kemudahan' => 'nullable|string',
+            'bilik' => 'nullable|numeric|min:0',
             'kemudahan_tambahan' => 'nullable|string',
             'nilai_kediaman' => 'nullable|numeric|min:0',
             'bulanan' => 'nullable|numeric|min:0',
-            'rumah' => 'required|numeric|min:0',
+            'rumah' => 'nullable|numeric|min:0',
             'nilai_rumah' => 'nullable|numeric|min:0',
-            'tanah' => 'required|numeric|min:0',
+            'tanah' => 'nullable|numeric|min:0',
             'nilai_tanah' => 'nullable|numeric|min:0',
-            'kenderaan' => 'required|numeric|min:0',
-            'astro' => 'required|numeric|min:0',
+            'kenderaan' => 'nullable|numeric|min:0',
+            'astro' => 'nullable|numeric|min:0',
             'nilai_astro' => 'nullable|numeric|min:0',
             'nilai_barang_kemas' => 'nullable|numeric|min:0',
             'nilai_simpanan' => 'nullable|numeric|min:0',
-            'lain' => 'required|numeric|min:0',
+            'lain' => 'nullable|numeric|min:0',
             'nilai_lain' => 'nullable|numeric|min:0',
         ]);
         $pemohonId = $request->input('maklumat_pemohon_id');
@@ -212,8 +241,8 @@ class InputController extends Controller
         $jumlah_tanggungan = $request->jumlah_tanggungan;
 
         $validatedData = $request->validate([
-            'butiran_tanggungan.*' => 'required|string',
-            'jumlah_tanggungan.*' => 'required|numeric|min:0',
+            'butiran_tanggungan.*' => 'nullable|string',
+            'jumlah_tanggungan.*' => 'nullable|numeric|min:0',
         ]);
 
         foreach ($butiran_tanggungan as $key => $butiran) { 
@@ -236,19 +265,19 @@ class InputController extends Controller
     public function hadPenambahanNew (Request $request)
     {
         $validatedData = $request->validate([
-            'int_kos_kronik' => 'required|numeric|min:0',
+            'int_kos_kronik' => 'nullable|numeric|min:0',
             'int_cacat_semulajadi' => 'nullable|numeric|min:0',
             'int_cacat_mendatang' => 'nullable|numeric|min:0',
-            'int_ibu_bapa' => 'required|numeric|min:0',
+            'int_ibu_bapa' => 'nullable|numeric|min:0',
             'int_ibu_tinggal' => 'nullable|numeric|min:0',
-            'int_masalah_keluarga' => 'required|numeric|min:0',
+            'int_masalah_keluarga' => 'nullable|numeric|min:0',
             'int_ibu_tunggal' => 'nullable|numeric|min:0',
-            'kos_kronik' => 'required|numeric|min:0',
-            'cacat_semulajadi' => 'required|numeric|min:0',
+            'kos_kronik' => 'nullable|numeric|min:0',
+            'cacat_semulajadi' => 'nullable|numeric|min:0',
             'cacat_mendatang' => 'nullable|numeric|min:0',
             'ibu_bapa' => 'nullable|numeric|min:0',
             'ibu_tinggal' => 'nullable|numeric|min:0',
-            'masalah_keluarga' => 'required|numeric|min:0',
+            'masalah_keluarga' => 'nullable|numeric|min:0',
             'ibu_tunggal' => 'nullable|numeric|min:0',
         ]);
         $pemohonId = $request->input('maklumat_pemohon_id');
@@ -267,20 +296,20 @@ class InputController extends Controller
     public function hadPenolakanNew(Request $request)
     {
         $validatedData = $request->validate([
-            'int_kereta_mahal' => 'required|numeric|min:0',
-            'int_kereta_murah' => 'required|numeric|min:0',
+            'int_kereta_mahal' => 'nullable|numeric|min:0',
+            'int_kereta_murah' => 'nullable|numeric|min:0',
             'int_telefon_bimbit' => 'nullable|numeric|min:0',
             'int_emas' => 'nullable|numeric|min:0',
-            'int_astro' => 'required|numeric|min:0',
+            'int_astro' => 'nullable|numeric|min:0',
             'int_aircond' => 'nullable|numeric|min:0',
-            'int_simpanan' => 'required|numeric|min:0',
+            'int_simpanan' => 'nullable|numeric|min:0',
             'int_home_theater' => 'nullable|numeric|min:0',
-            'int_perokok' => 'required|numeric|min:0',
-            'kereta_mahal' => 'required|numeric|min:0',
+            'int_perokok' => 'nullable|numeric|min:0',
+            'kereta_mahal' => 'nullable|numeric|min:0',
             'kereta_murah' => 'nullable|numeric|min:0',
             'telefon_bimbit' => 'nullable|numeric|min:0',
             'emas' => 'nullable|numeric|min:0',
-            'astro' => 'required|numeric|min:0',
+            'astro' => 'nullable|numeric|min:0',
             'aircond' => 'nullable|numeric|min:0',
             'radio' => 'nullable|numeric|min:0',
             'simpanan' => 'nullable|numeric|min:0',
@@ -338,4 +367,86 @@ class InputController extends Controller
 
     return view('/sejarahBantuan')->with('pemohonId', $pemohonId);
     }
+
+    
+    public function pemohonBaru(Request $request)
+    {
+    // Identify the current step
+    $step = $request->input('step', 1);
+
+    switch ($step) {
+        case 1: // Step 1: Pemohon Data
+            $validatedData = $request->validate([
+                'nama' => 'required|string',
+                'ic' => 'required|numeric|digits:12|unique:maklumat_pemohon',
+                'jantina' => 'nullable|in:Lelaki,Wanita',
+                'tarikh_lahir' => 'nullable|date',
+                'status' => 'nullable|string',
+                'mental' => 'nullable|in:Waras,Tidak Waras',
+                'islam' => 'nullable|in:Baik,Kurang Baik',
+                'fizikal' => 'nullable|string',
+                'alamat' => 'nullable|string',
+                'poskod' => 'nullable|numeric',
+                'bandar' => 'nullable|string',
+                'nombor_rumah' => 'nullable|numeric',
+                'nombor_bimbit' => 'nullable|numeric',
+            ]);
+
+            $pemohon = MaklumatPemohon::create($validatedData);
+            $request->session()->put('pemohonId', $pemohon->id);
+            return redirect()->route('pemohon.baru', ['step' => 2]);
+        
+        case 2: // Step 2: Pasangan Data
+            $validatedData = $request->validate([
+                'nama' => 'nullable|string',
+                'ic' => 'nullable|numeric|digits:12|unique:maklumat_pasangan',
+                'jantina' => 'nullable|in:Lelaki,Wanita',
+                'tarikh_lahir' => 'nullable|date',
+                'status' => 'nullable|string',
+                'mental' => 'nullable|in:Waras,Tidak Waras',
+                'islam' => 'nullable|in:Baik,Kurang Baik',
+                'fizikal' => 'nullable|string',
+                'alamat' => 'nullable|string',
+                'poskod' => 'nullable|numeric',
+                'bandar' => 'nullable|string',
+                'nombor_rumah' => 'nullable|numeric',
+                'nombor_bimbit' => 'nullable|numeric',
+            ]);
+
+            $pemohonId = $request->session()->get('pemohonId');
+            $dataPasangan = new MaklumatPasangan($validatedData);
+            $dataPasangan->maklumat_pemohon_id = $pemohonId;
+            $dataPasangan->save();
+            return redirect()->route('pemohon.baru', ['step' => 3]);
+
+        case 3: // Step 3: Pendapatan Data
+            $validatedData = $request->validate([
+                'jawatan' => 'nullable|string',
+                'gaji' => 'nullable|numeric|min:0',
+                'majikan' => 'nullable|string',
+                'jawatan_psgn' => 'nullable|string',
+                'gaji_psgn' => 'nullable|numeric|min:0',
+                'majikan_psgn' => 'nullable|string',
+                'sumbangan_anak' => 'nullable|numeric|min:0',
+                'sumbangan_saudara' => 'nullable|numeric|min:0',
+                'sampingan' => 'nullable|numeric|min:0',
+                'sumbangan_agensi' => 'nullable|numeric|min:0',
+            ]);
+
+            $pemohonId = $request->session()->get('pemohonId');
+            $dataPendapatan = new Pendapatan($validatedData);
+            $dataPendapatan->maklumat_pemohon_id = $pemohonId;
+            $dataPendapatan->save();
+            $request->session()->forget('pemohonId');
+
+        default:
+            return view('form.step{$step}'); // Initial form step
+    }
+}
+
+public function formComplete()
+{
+    return view('form.complete');
+}
+
 }

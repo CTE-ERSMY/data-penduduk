@@ -7,7 +7,6 @@
         // selector skips any 'li' elements that do not contain a child with a tab data-toggle
         var baseItemSelector = 'li:has([data-toggle="tab"])';
     
-        
         // Merge options with defaults
         var $settings = $.extend({}, $.fn.bootstrapWizard.defaults, options);
         var $activeTab = null;
@@ -294,7 +293,26 @@
         $('[rel="tooltip"]').tooltip();
     
         // Code for the Validator
-        
+        var $validator = $('.wizard-card form').validate({
+              rules: {
+                firstname: {
+                  required: true,
+                  minlength: 3
+                },
+                lastname: {
+                  required: true,
+                  minlength: 3
+                },
+                email: {
+                  required: true,
+                  minlength: 3,
+                }
+            },
+    
+            errorPlacement: function(error, element) {
+                $(element).parent('div').addClass('has-error');
+             }
+        });
     
         // Wizard Initialization
           $('.wizard-card').bootstrapWizard({

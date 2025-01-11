@@ -12,6 +12,7 @@ class harta extends Model
     protected $table = 'harta';
 
     protected $fillable = [
+        'maklumat_pemohon_id',
         'status_kediaman',
         'jenis_kediaman',
         'kemudahan',

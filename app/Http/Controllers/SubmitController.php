@@ -14,45 +14,45 @@ class SubmitController extends Controller
 {   
     public function pemohonView()
     {
-        return view ('/newPemohon'); 
+        return view ('pemohonBaru'); 
     }
-    public function submit(Request $request)
+    public function pemohonSubmit(Request $request)
     {   
         $validatedData = $request->validate([
             // Validation rules for pemohon
             'nama' => 'required|string',
-            'ic' => 'required|numeric|digits:12|unique:maklumat_pemohon',
-            'jantina' => 'required|in:Lelaki,Wanita',
-            'tarikh_lahir' => 'required|date',
-            'status' => 'required|string',
-            'mental' => 'required|in:Waras,Tidak Waras',
-            'islam' => 'required|in:Baik,Kurang Baik',
-            'fizikal' => 'required|string',
-            'alamat' => 'required|string',
-            'poskod' => 'required|numeric',
+            'ic' => 'required|numeric|digits:12|',
+            'jantina' => 'nullable|in:Lelaki,Wanita',
+            'tarikh_lahir' => 'nullable|date',
+            'status' => 'nullable|string',
+            'mental' => 'nullable|in:Waras,Tidak Waras',
+            'islam' => 'nullable|in:Baik,Kurang Baik',
+            'fizikal' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'poskod' => 'nullable|numeric',
             'bandar' => 'nullable|string',
             'nombor_rumah' => 'nullable|numeric',
-            'nombor_bimbit' => 'required|numeric',
+            'nombor_bimbit' => 'nullable|numeric',
             
             // Validation rules for pasangan
-            'nama_pasangan' => 'required|string',
-            'ic_pasangan' => 'required|numeric|digits:12',
-            'jantina_pasangan' => 'required|in:Lelaki,Wanita',
-            'tarikh_lahir_pasangan' => 'required|date',
-            'status_pasangan' => 'required|string',
-            'mental_pasangan' => 'required|in:Waras,Tidak Waras',
-            'islam_pasangan' => 'required|in:Baik,Kurang Baik',
-            'fizikal_pasangan' => 'required|string',
-            'alamat_pasangan' => 'required|string',
-            'poskod_pasangan' => 'required|numeric',
+            'nama_pasangan' => 'nullable|string',
+            'ic_pasangan' => 'nullable|numeric|digits:12',
+            'jantina_pasangan' => 'nullable|in:Lelaki,Wanita',
+            'tarikh_lahir_pasangan' => 'nullable|date',
+            'status_pasangan' => 'nullable|string',
+            'mental_pasangan' => 'nullable|in:Waras,Tidak Waras',
+            'islam_pasangan' => 'nullable|in:Baik,Kurang Baik',
+            'fizikal_pasangan' => 'nullable|string',
+            'alamat_pasangan' => 'nullable|string',
+            'poskod_pasangan' => 'nullable|numeric',
             'bandar_pasangan' => 'nullable|string',
             'nombor_rumah_pasangan' => 'nullable|numeric',
-            'nombor_bimbit_pasangan' => 'required|numeric',
+            'nombor_bimbit_pasangan' => 'nullable|numeric',
             
             // Validation rules for pendapatan
-            'jawatan' => 'required|string',
-            'gaji' => 'required|numeric|min:0',
-            'majikan' => 'required|string',
+            'jawatan' => 'nullable|string',
+            'gaji' => 'nullable|numeric|min:0',
+            'majikan' => 'nullable|string',
             'jawatan_psgn' => 'nullable|string',
             'gaji_psgn' => 'nullable|numeric|min:0',
             'majikan_psgn' => 'nullable|string',
@@ -62,54 +62,56 @@ class SubmitController extends Controller
             'sumbangan_agensi' => 'nullable|numeric|min:0',
             
             // Validation rules for perbelanjaan
-            'makan' => 'required|numeric|min:0',
-            'perubatan' => 'required|numeric|min:0',
-            'bil' => 'required|numeric|min:0',
-            'pengangkutan' => 'required|numeric|min:0',
-            'sewa_rumah' => 'required|numeric|min:0',
-            'persekolahan' => 'required|numeric|min:0',
-            'lain' => 'required|numeric|min:0',
+            'makan' => 'nullable|numeric|min:0',
+            'perubatan' => 'nullable|numeric|min:0',
+            'bil' => 'nullable|numeric|min:0',
+            'pengangkutan' => 'nullable|numeric|min:0',
+            'sewa_rumah' => 'nullable|numeric|min:0',
+            'persekolahan' => 'nullable|numeric|min:0',
+            'lain' => 'nullable|numeric|min:0',
             
             // Validation rules for harta
-            'status_kediaman' => 'required|string',
-            'jenis_kediaman' => 'required|string',
-            'kemudahan' => 'required|string',
-            'bilik' => 'required|numeric|min:0',
+            'status_kediaman' => 'nullable|string',
+            'jenis_kediaman' => 'nullable|string',
+            'kemudahan' => 'nullable|string',
+            'bilik' => 'nullable|numeric|min:0',
             'kemudahan_tambahan' => 'nullable|string',
             'nilai_kediaman' => 'nullable|numeric|min:0',
             'bulanan' => 'nullable|numeric|min:0',
-            'rumah' => 'required|numeric|min:0',
+            'rumah' => 'nullable|numeric|min:0',
             'nilai_rumah' => 'nullable|numeric|min:0',
-            'tanah' => 'required|numeric|min:0',
+            'tanah' => 'nullable|numeric|min:0',
             'nilai_tanah' => 'nullable|numeric|min:0',
-            'kenderaan' => 'required|numeric|min:0',
-            'astro' => 'required|numeric|min:0',
+            'kenderaan' => 'nullable|numeric|min:0',
+            'nilai_kenderaan' => 'nullable|numeric|min:0',
+            'astro' => 'nullable|numeric|min:0',
             'nilai_astro' => 'nullable|numeric|min:0',
             'barang_kemas' => 'nullable|numeric|min:0',
             'simpanan' => 'nullable|numeric|min:0',
-            'lain-lain' => 'required|numeric|min:0',
+            'lain_lain' => 'nullable|numeric|min:0',
             'nilai_lain' => 'nullable|numeric|min:0',
         ]);
 
-
-        try {
             $pemohon = MaklumatPemohon::create([
                 'nama' => $validatedData['nama'],
                 'ic' => $validatedData['ic'],
-                'jantina' => $validatedData['jantina'],
-                'tarikh_lahir' => $validatedData['tarikh_lahir'],
-                'status' => $validatedData['status'],
-                'mental' => $validatedData['mental'],
-                'islam' => $validatedData['islam'],
-                'fizikal' => $validatedData['fizikal'],
-                'alamat' => $validatedData['alamat'],
-                'poskod' => $validatedData['poskod'],
-                'bandar' => $validatedData['bandar'],
-                'nombor_rumah' => $validatedData['nombor_rumah'],
-                'nombor_bimbit' => $validatedData['nombor_bimbit'],
+                'jantina' => $validatedData['jantina'] ?? null,
+                'tarikh_lahir' => $validatedData['tarikh_lahir'] ?? null,
+                'status' => $validatedData['status'] ?? null,
+                'mental' => $validatedData['mental'] ?? null,
+                'islam' => $validatedData['islam'] ?? null,
+                'fizikal' => $validatedData['fizikal'] ?? null,
+                'alamat' => $validatedData['alamat'] ?? null,
+                'poskod' => $validatedData['poskod'] ?? null,
+                'bandar' => $validatedData['bandar'] ?? null,
+                'nombor_rumah' => $validatedData['nombor_rumah'] ?? null,
+                'nombor_bimbit' => $validatedData['nombor_bimbit'] ?? null,
             ]);
+
         // Create MaklumatPasangan
-        MaklumatPasangan::create([
+        if (!empty($validatedData['nama_pasangan']) || !empty($validatedData['ic_pasangan']) ) {
+        $pasangan = MaklumatPasangan::create([
+            'maklumat_pemohon_id' => $pemohon->id,
             'nama' => $validatedData['nama_pasangan'],
             'ic' => $validatedData['ic_pasangan'],
             'jantina' => $validatedData['jantina_pasangan'],
@@ -123,11 +125,11 @@ class SubmitController extends Controller
             'bandar' => $validatedData['bandar_pasangan'],
             'nombor_rumah' => $validatedData['nombor_rumah_pasangan'],
             'nombor_bimbit' => $validatedData['nombor_bimbit_pasangan'],
-            'maklumat_pemohon_id' => $pemohon->id,
         ]);
+    }
 
-        // Create Pendapatan
-        Pendapatan::create([
+        $pendapatan = Pendapatan::create([
+            'maklumat_pemohon_id' => $pemohon->id,
             'jawatan' => $validatedData['jawatan'],
             'gaji' => $validatedData['gaji'],
             'majikan' => $validatedData['majikan'],
@@ -140,21 +142,22 @@ class SubmitController extends Controller
             'sumbangan_agensi' => $validatedData['sumbangan_agensi'],
             'maklumat_pemohon_id' => $pemohon->id,
         ]);
-
         // Create Perbelanjaan
-        Perbelanjaan::create([
+        $perbelanjaan = Perbelanjaan::create([
+            'maklumat_pemohon_id' => $pemohon->id,
             'makan' => $validatedData['makan'],
             'perubatan' => $validatedData['perubatan'],
             'bil' => $validatedData['bil'],
             'pengangkutan' => $validatedData['pengangkutan'],
-            'sewa_rumah' => $validatedData['sewa-]umah'],
+            'sewa_rumah' => $validatedData['sewa_rumah'],
             'persekolahan' => $validatedData['persekolahan'],
             'lain' => $validatedData['lain'],
             'maklumat_pemohon_id' => $pemohon->id,
         ]);
 
         // Create Harta
-        Harta::create([
+        $harta = Harta::create([
+            'maklumat_pemohon_id' => $pemohon->id,
             'status_kediaman' => $validatedData['status_kediaman'],
             'jenis_kediaman' => $validatedData['jenis_kediaman'],
             'kemudahan' => $validatedData['kemudahan'],
@@ -174,14 +177,11 @@ class SubmitController extends Controller
             'nilai_simpanan' => $validatedData['simpanan'],
             'lain' => $validatedData['lain_lain'],
             'nilai_lain' => $validatedData['nilai_lain'],
-            'maklumat_pemohon_id' => $pemohon->id,
         ]);
+        dd($harta);
 
-        return redirect()->back()->with('success', 'Data submitted successfully.');
-    } catch (\Exception $e) {
-        // Handle exceptions
-        return redirect()->back()->with('error', 'Failed to submit data. Please try again.');
+
+        return redirect()->route('pemohon.display')->with('success', 'Data submitted successfully.');
     }
-        
-    }
+    
 }

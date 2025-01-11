@@ -104,18 +104,18 @@ class EditController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|string',
-            'ic' => 'required|numeric|digits:12|unique:maklumat_pemohon,ic,'.$id,
+            'ic' => 'required',
             'jantina' => 'required|in:Lelaki,Wanita',
             'tarikh_lahir' => 'required|date',
-            'status' => 'required|string',
-            'mental' => 'required|in:Waras,Tidak Waras',
-            'islam' => 'required|in:Baik,Kurang Baik',
-            'fizikal' => 'required|string',
-            'alamat' => 'required|string',
-            'poskod' => 'required|numeric',
+            'status' => 'nullable|string',
+            'mental' => 'nullable|in:Waras,Tidak Waras',
+            'islam' => 'nullable|in:Baik,Kurang Baik',
+            'fizikal' => 'nullable|string',
+            'alamat' => 'nullable|string',
+            'poskod' => 'nullable|numeric',
             'bandar' => 'nullable|string',
             'nombor_rumah' => 'nullable|numeric',
-            'nombor_bimbit' => 'required|numeric',
+            'nombor_bimbit' => 'nullable|numeric',
         ]);
     
         // Find the pemohon by ID

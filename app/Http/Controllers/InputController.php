@@ -27,7 +27,7 @@ class InputController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string',
             'ic' => 'required|numeric|digits:12',
-            'jantina' => 'nullable|in:Lelaki,Wanita',
+            'jantina' => 'nullable|in:Lelaki,Perempuan',
             'tarikh_lahir' => 'nullable|date',
             'status' => 'nullable|string',
             'mental' => 'nullable|in:Waras,Tidak Waras',
@@ -83,7 +83,7 @@ class InputController extends Controller
         $validatedData = $request->validate([
             'nama' => 'nullable|string',
             'ic' => 'nullable|numeric|digits:12|unique:maklumat_pasangan',
-            'jantina' => 'nullable|in:Lelaki,Wanita',
+            'jantina' => 'nullable|in:Lelaki,Perempuan',
             'tarikh_lahir' => 'nullable|date',
             'status' => 'nullable|string',
             'mental' => 'nullable|in:Waras,Tidak Waras',
@@ -163,15 +163,15 @@ class InputController extends Controller
     public function warisNew(Request $request)
     {
         $validatedData = $request->validate([
-            'nama' => 'nullable|string',
-            'ic' => 'nullable|numeric|digits:12|unique:waris',
-            'umur' => 'nullable|numeric|min:0',
-            'hubungan' => 'nullable|string',
-            'status' => 'nullable|string',
-            'kerja' => 'nullable|string',
+            'nama' => 'required|string',
+            'ic' => 'required|numeric|digits:12|unique:waris',
+            'umur' => 'required|numeric|min:0',
+            'hubungan' => 'required|string',
+            'status' => 'required|string',
+            'kerja' => 'required|string',
             'fizikal' => 'nullable|string',
             'mental' => 'nullable|in:Waras,Tidak Waras',
-            'pendapatan' => 'nullable|numeric|min:0',
+            'pendapatan' => 'required|numeric|min:0',
         ]);
         // Initialize an array to store all entered data
         $pemohonId = $request->input('maklumat_pemohon_id');
@@ -183,13 +183,9 @@ class InputController extends Controller
     
         // Save the model to the database
         $waris->save();
-    
-        $request->session()->flash('pemohonId', $pemohonId);
-        // Retrieve all existing Waris data for the current pemohonId
-        $allWarisData = Waris::where('maklumat_pemohon_id', $pemohonId)->get();
 
     // Pass the pemohonId and allWarisData to the view
-    return view('/newWaris')->with(['pemohonId' => $pemohonId, 'allWarisData' => $allWarisData]);
+    return redirect()->back()->with('success', 'Maklumat Waris dan Tanggungan berjaya ditambah!');
     }
     public function hartaView($pemohonId)
     {
@@ -379,7 +375,7 @@ class InputController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'required|string',
                 'ic' => 'required|numeric|digits:12|unique:maklumat_pemohon',
-                'jantina' => 'nullable|in:Lelaki,Wanita',
+                'jantina' => 'nullable|in:Lelaki,Perempuan',
                 'tarikh_lahir' => 'nullable|date',
                 'status' => 'nullable|string',
                 'mental' => 'nullable|in:Waras,Tidak Waras',
@@ -400,7 +396,7 @@ class InputController extends Controller
             $validatedData = $request->validate([
                 'nama' => 'nullable|string',
                 'ic' => 'nullable|numeric|digits:12|unique:maklumat_pasangan',
-                'jantina' => 'nullable|in:Lelaki,Wanita',
+                'jantina' => 'nullable|in:Lelaki,Perempuan',
                 'tarikh_lahir' => 'nullable|date',
                 'status' => 'nullable|string',
                 'mental' => 'nullable|in:Waras,Tidak Waras',

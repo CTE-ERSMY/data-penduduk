@@ -221,14 +221,14 @@ class EditController extends Controller
     {
         $validatedData = $request->validate([
             'nama' => 'required|string',
-            'ic' => 'required|numeric|digits:12|unique:maklumat_pemohon,ic,'.$id,
-            'umur' => 'required|numeric',
-            'hubungan' => 'required|string',
-            'status' => 'required|in:Sekolah,Bekerja,Tidak Bekerja',
-            'kerja' => 'required|string',
-            'fizikal' => 'required|string',
-            'mental' => 'required|in:Waras,Tidak Waras',
-            'pendapatan' => 'required|numeric',
+            'ic' => 'required|numeric|digits:12|unique:waris,ic,'.$id,
+            'umur' => 'nullable|numeric',
+            'hubungan' => 'nullable|string',
+            'status' => 'nullable|in:Sekolah,Bekerja,Tidak Bekerja',
+            'kerja' => 'nullable|string',
+            'fizikal' => 'nullable|string',
+            'mental' => 'nullable|in:Waras,Tidak Waras',
+            'pendapatan' => 'nullable|numeric',
         ]);
         $waris = Waris::findOrFail($id);
 
@@ -257,23 +257,23 @@ class EditController extends Controller
     public function hartaEdit(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'status_kediaman' => 'required|string',
-            'jenis_kediaman' => 'required|string',
-            'kemudahan' => 'required|string',
-            'bilik' => 'required|numeric|min:0',
+            'status_kediaman' => 'nullable|string',
+            'jenis_kediaman' => 'nullable|string',
+            'kemudahan' => 'nullable|string',
+            'bilik' => 'nullable|numeric|min:0',
             'kemudahan_tambahan' => 'nullable|string',
             'nilai_kediaman' => 'nullable|numeric|min:0',
             'bulanan' => 'nullable|numeric|min:0',
-            'rumah' => 'required|numeric|min:0',
+            'rumah' => 'nullable|numeric|min:0',
             'nilai_rumah' => 'nullable|numeric|min:0',
-            'tanah' => 'required|numeric|min:0',
+            'tanah' => 'nullable|numeric|min:0',
             'nilai_tanah' => 'nullable|numeric|min:0',
-            'kenderaan' => 'required|numeric|min:0',
-            'astro' => 'required|numeric|min:0',
+            'kenderaan' => 'nullable|numeric|min:0',
+            'astro' => 'nullable|numeric|min:0',
             'nilai_astro' => 'nullable|numeric|min:0',
             'nilai_barang_kemas' => 'nullable|numeric|min:0',
             'nilai_simpanan' => 'nullable|numeric|min:0',
-            'lain' => 'required|numeric|min:0',
+            'lain' => 'nullable|numeric|min:0',
             'nilai_lain' => 'nullable|numeric|min:0',
         ]);
 
@@ -299,8 +299,8 @@ class EditController extends Controller
     public function hadTanggunganEdit(Request $request, $id)    
     {
         $validatedData = $request->validate([
-            'butiran_tanggungan' => 'required|string',
-            'jumlah_tanggungan' => 'required|numeric|min:0',
+            'butiran_tanggungan' => 'nullable|string',
+            'jumlah_tanggungan' => 'nullable|numeric|min:0',
         ]);
         $hadTanggungan = HadTanggungan::findOrFail($id);
 
@@ -329,19 +329,19 @@ class EditController extends Controller
     public function hadPenambahanEdit(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'int_kos_kronik' => 'required|numeric|min:0',
+            'int_kos_kronik' => 'nullable|numeric|min:0',
             'int_cacat_semulajadi' => 'nullable|numeric|min:0',
             'int_cacat_mendatang' => 'nullable|numeric|min:0',
-            'int_ibu_bapa' => 'required|numeric|min:0',
+            'int_ibu_bapa' => 'nullable|numeric|min:0',
             'int_ibu_tinggal' => 'nullable|numeric|min:0',
-            'int_masalah_keluarga' => 'required|numeric|min:0',
+            'int_masalah_keluarga' => 'nullable|numeric|min:0',
             'int_ibu_tunggal' => 'nullable|numeric|min:0',
-            'kos_kronik' => 'required|numeric|min:0',
-            'cacat_semulajadi' => 'required|numeric|min:0',
+            'kos_kronik' => 'nullable|numeric|min:0',
+            'cacat_semulajadi' => 'nullable|numeric|min:0',
             'cacat_mendatang' => 'nullable|numeric|min:0',
             'ibu_bapa' => 'nullable|numeric|min:0',
             'ibu_tinggal' => 'nullable|numeric|min:0',
-            'masalah_keluarga' => 'required|numeric|min:0',
+            'masalah_keluarga' => 'nullable|numeric|min:0',
             'ibu_tunggal' => 'nullable|numeric|min:0',
         ]);
 
@@ -374,20 +374,20 @@ class EditController extends Controller
     public function hadPenolakanEdit(Request $request, $id)
     {
         $validatedData = $request->validate([
-            'int_kereta_mahal' => 'required|numeric|min:0',
-            'int_kereta_murah' => 'required|numeric|min:0',
+            'int_kereta_mahal' => 'nullable|numeric|min:0',
+            'int_kereta_murah' => 'nullable|numeric|min:0',
             'int_telefon_bimbit' => 'nullable|numeric|min:0',
             'int_emas' => 'nullable|numeric|min:0',
-            'int_astro' => 'required|numeric|min:0',
+            'int_astro' => 'nullable|numeric|min:0',
             'int_aircond' => 'nullable|numeric|min:0',
-            'int_simpanan' => 'required|numeric|min:0',
+            'int_simpanan' => 'nullable|numeric|min:0',
             'int_home_theater' => 'nullable|numeric|min:0',
-            'int_perokok' => 'required|numeric|min:0',
-            'kereta_mahal' => 'required|numeric|min:0',
+            'int_perokok' => 'nullable|numeric|min:0',
+            'kereta_mahal' => 'nullable|numeric|min:0',
             'kereta_murah' => 'nullable|numeric|min:0',
             'telefon_bimbit' => 'nullable|numeric|min:0',
             'emas' => 'nullable|numeric|min:0',
-            'astro' => 'required|numeric|min:0',
+            'astro' => 'nullable|numeric|min:0',
             'aircond' => 'nullable|numeric|min:0',
             'radio' => 'nullable|numeric|min:0',
             'simpanan' => 'nullable|numeric|min:0',

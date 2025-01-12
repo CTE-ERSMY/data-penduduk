@@ -101,7 +101,7 @@
             }
     
             // Determine gender
-            const gender = parseInt(genderDigit) % 2 === 0 ? 'Lelaki' : 'Wanita';
+            const gender = parseInt(genderDigit) % 2 === 0 ? 'Lelaki' : 'Perempuan';
             document.getElementById('jantina').value = gender;
         } else {
             // Clear fields if IC number is incomplete or invalid

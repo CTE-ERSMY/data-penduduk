@@ -165,11 +165,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="nombor_rumah" class="form-label">No Tel 1</label>
-                        <input type="date" class="form-control" id="nombor_rumah" name="nombor_rumah">
+                        <input type="number" class="form-control" id="nombor_rumah" name="nombor_rumah">
                     </div>
                     <div class="mb-3">
                         <label for="nombor_bimbit" class="form-label">No Tel 2</label>
-                        <input type="date" class="form-control" id="nombor_bimbit" name="nombor_bimbit">
+                        <input type="number" class="form-control" id="nombor_bimbit" name="nombor_bimbit">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>

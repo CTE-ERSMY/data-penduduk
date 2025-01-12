@@ -32,22 +32,23 @@
             <td><select name="status" class="form-control" required>
                 <option value="">Select Status</option>
                 <option value="Sekolah" {{$waris->status == 'Sekolah' ? 'selected' : ''}}>Sekolah</option>
+                <option value="IPTA/S" {{$waris->status == 'IPTA/S' ? 'selected' : ''}}>IPTA/S</option>
                 <option value="Bekerja" {{$waris->status == 'Bekerja' ? 'selected' : ''}}>Bekerja</option>
                 <option value="Tidak Bekerja" {{$waris->status == 'Tidak Bekerja' ? 'selected' : ''}}>Tidak Bekerja</option>
             </select></td>
         </tr><tr>
             <th>Sekolah/Pekerjaan</th>
-            <td><input type="text" name="kerja" class="form-control" value="{{$waris->kerja}}"></td>
+            <td><input type="text" name="kerja" class="form-control" value="{{$waris->kerja}}" required></td>
         </tr><tr>
             <th>Fizikal</th>
-            <td><select name="fizikal" class="form-control" id="fizikal" required>
+            <td><select name="fizikal" class="form-control" id="fizikal">
                 <option value="Sihat" {{ $waris->fizikal == 'Sihat' ? 'selected' : '' }}>Sihat</option>
                 <option value="Sakit" {{ $waris->fizikal == 'Sakit' ? 'selected' : '' }}>Sakit</option>    
                 <option value="OKU" {{ $waris->fizikal == 'OKU' ? 'selected' : '' }}>OKU</option>
                 </select></td>
         </tr><tr>
             <th>Mental</th>
-            <td><select name="mental" class="form-control" id="mental" required>
+            <td><select name="mental" class="form-control" id="mental">
                 <option value="Waras" {{$waris->mental == 'Waras' ? 'selected' : '' }}>Waras</option>    
                 <option value="Tidak Waras" {{$waris->mental == 'Tidak Waras' ? 'selected' : '' }}>Tidak Waras</option>
                 </select></td>

@@ -321,9 +321,9 @@ class InputController extends Controller
 
         return view('/sejarahBantuan')->with('pemohonId', $pemohonId);
     }
-    public function sejarahBantuanView()
+    public function sejarahBantuanView($pemohonId)
     {
-        return view ('/sejarahBantuan');
+        return view ('/sejarahBantuan', compact('pemohonId'));
     }
     public function sejarahBantuanNew(Request $request)
     {
@@ -361,7 +361,8 @@ class InputController extends Controller
 
     $pemohonId = $request->input('maklumat_pemohon_id');
 
-    return view('/sejarahBantuan')->with('pemohonId', $pemohonId);
+    return redirect()->route('sejarah.details', ['id' => $pemohonId]);
+
     }
 
     

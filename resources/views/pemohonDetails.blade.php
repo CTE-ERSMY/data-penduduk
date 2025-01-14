@@ -147,6 +147,7 @@
                                 <option value="Sihat">Sihat</option>
                                 <option value="Sakit">Sakit</option>
                                 <option value="OKU">OKU</option>
+                                <option value="Terlantar">Terlantar</option>
                             </select>
                     </div>
                     <div class="mb-3">

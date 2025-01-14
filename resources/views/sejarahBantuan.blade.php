@@ -1,4 +1,6 @@
-@include('header3')
+@extends('header')
+
+@section('content')
 <header>
     <style>
         td {
@@ -6,13 +8,17 @@
         }
     </style>
 </header>
+<main>
+    <div class="sejarahBantuan" style="padding:20px">
+        
 <h5>Sejarah Bantuan</h5>
 <form action="{{route('sejarahBantuan.new')}}" method="POST" enctype="multipart/form-data">
     @csrf
     @if(isset($pemohonId))
-        <input type="hidden" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
+        <input type="text" name="maklumat_pemohon_id" value="{{ $pemohonId }}">
         @endif
-    <table class="table table-border">
+<div class="table-responsive">
+        <table class="table table-border">
         <thead>
             <tr>
                 <th>Bantuan di Pohon/Terima</th>
@@ -49,5 +55,10 @@
             </tr>
         </tbody>
     </table>
+</div>
     <center><button type="submit" class="btn btn-success">Selesai</button></center>
 </form>
+
+</div>
+</main>
+@endsection

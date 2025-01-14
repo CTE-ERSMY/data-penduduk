@@ -69,6 +69,6 @@ class MaklumatPemohon extends Model
     }
     public function SejarahBantuan()
     {
-        return $this->hasOne(SejarahBantuan::class);
+        return $this->hasMany(SejarahBantuan::class);
     }
 }

@@ -1,10 +1,11 @@
 @extends('header')
 
 @section('content')
-<div id="pemohon">
+<div id="pemohon" style="padding: 20px">
   <h5>Maklumat Pemohon</h5>
   <form action="{{ route('newPemohon.new')}}" method="POST">
       @csrf
+      <div class="table-responsive">
       <table class="table table-border">
           <tbody>
               <tr>
@@ -48,6 +49,7 @@
                           <option value="Sihat">Sihat</option>
                           <option value="Sakit">Sakit</option>
                           <option value="OKU">OKU</option>
+                          <option value="Terlantar">Terlantar</option>
                       </select></td>
               </tr><tr>
                   <th rowspan="2">Alamat</th>
@@ -67,11 +69,12 @@
                   <td><input type="text" name="nombor_bimbit" placeholder="tanpa (-)" id="nombor_bimbit" class="form-control"></td>
               </tr>
               <tr>
-                  <td colspan="4" style="text-align: center"><button type="reset" class="btn btn-danger" style="margin-left: 10px; margin-right: 10px">Reset</button><input type="submit" class="btn btn-success" value="submit" style="margin-left: 10px; margin-right: 10px">
+                  <td colspan="4" style="text-align: center"><button type="reset" class="btn btn-danger" style="margin-left: 10px; margin-right: 10px">Reset</button><input type="submit" class="btn btn-success" value="Seterusnya" style="margin-left: 10px; margin-right: 10px">
                   </td>     
               </tr>    
           </tbody>    
       </table>
+    </div>
 </main>
 @endsection
 
@@ -101,7 +104,7 @@
             }
     
             // Determine gender
-            const gender = parseInt(genderDigit) % 2 === 0 ? 'Lelaki' : 'Perempuan';
+            const gender = parseInt(genderDigit) % 2 === 0 ? 'Perempuan' : 'Lelaki';
             document.getElementById('jantina').value = gender;
         } else {
             // Clear fields if IC number is incomplete or invalid
@@ -110,5 +113,5 @@
         }
     });
     </script>
-    @endpush
+    @endpush    
     

@@ -41,7 +41,7 @@ Route::get('/hadPenambahanView', [InputController::class, 'hadPenambahanView'])-
 Route::post('/hadPenambahanNew', [InputController::class, 'hadPenambahanNew'])->name('hadPenambahan.new');
 Route::get('/hadPenolakanView', [InputController::class, 'hadPenolakanView'])->name('hadPenolakan.view');
 Route::post('/hadPenolakanNew', [InputController::class, 'hadPenolakanNew'])->name('hadPenolakan.new');
-Route::get('/sejarahBantuanView', [InputController::class, 'sejarahBantuanView'])->name('sejarahBantuan.view');
+Route::get('/sejarahBantuanView/{pemohonId}', [InputController::class, 'sejarahBantuanView'])->name('sejarahBantuan.view');
 Route::post('/sejarahBantuanNew', [InputController::class, 'sejarahBantuanNew'])->name('sejarahBantuan.new');
 Route::get('/pemohonDisplay', [DisplayController::class, 'pemohonDisplay'])->name('pemohon.display');
 Route::get('/pemohonDetails/{id}', [DisplayController::class, 'pemohonDetails'])->name('pemohon.details');

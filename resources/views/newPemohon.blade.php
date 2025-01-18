@@ -75,6 +75,7 @@
           </tbody>    
       </table>
     </div>
+  </form>
 </main>
 @endsection
 

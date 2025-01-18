@@ -1,7 +1,7 @@
 @include('header2')  
-<h5>MAKLUMAT TANGGUNGAN</h5>
 <br>
 <button class="btn btn-primary" style="width:fit-content" data-bs-toggle="modal" data-bs-target="#addWarisModal">+ Waris dan Tanggungan</button><br><br>
+<h5>MAKLUMAT TANGGUNGAN</h5>
 @if ($waris->isNotEmpty())
     @php
                 $count=1;
@@ -17,6 +17,7 @@
             <th>Umur (tahun)</th>
             <th>Hubungan</th>
             <th>Sekolah</th>
+            <th>Tinggal Bersama/Tidak</th>
             <th>Fizikal</th>
             <th>Mental</th>
             <th>Keperluan</th>
@@ -32,6 +33,7 @@
                 <td>{{ $warisData->umur }} </td>
                 <td>{{ $warisData->hubungan }} </td>
                 <td>{{ $warisData->kerja }} </td>
+                <td>{{ $warisData->serumah }} </td>
                 <td>{{ $warisData->fizikal }} </td>
                 <td>{{ $warisData->mental }} </td>
                 <td>{{ $warisData->pendapatan }} </td>
@@ -58,6 +60,7 @@ $count2=1;
             <th>Umur (tahun)</th>
             <th>Hubungan</th>
             <th>Pekerjaan</th>
+            <th>Tinggal Bersama/Tidak</th>
             <th>Fizikal</th>
             <th>Mental</th>
             <th>Pendapatan</th>
@@ -73,6 +76,7 @@ $count2=1;
                 <td>{{ $warisData->umur }} </td>
                 <td>{{ $warisData->hubungan }} </td>
                 <td>{{ $warisData->kerja }} </td>
+                <td>{{ $warisData->serumah }} </td>
                 <td>{{ $warisData->fizikal }} </td>
                 <td>{{ $warisData->mental }} </td>
                 <td>{{ $warisData->pendapatan }} </td>
@@ -108,14 +112,20 @@ $count2=1;
                         <input type="text" class="form-control" id="icInput" name="ic" maxlength="12" required>
                     </div>
                     <div class="mb-3">
-                        <label for="jantina" class="form-label">Umur</label>
-                        <input type="text" name="umur" id="umur" class="form-control" required>
+                        <label for="umur" class="form-label">Umur</label>
+                        <input type="text" name="umur" id="ageOutput" class="form-control" readonly>
                     </div>
                     <div class="mb-3">
                         <label for="hubungan" class="form-label">Hubungan</label>
                         <select name="hubungan" class="form-control" id="hubungan" required>
                             <option value="" selected disabled>Sila Pilih</option>
+                            <option value="Ibu">Ibu</option>
+                            <option value="Bapa">Bapa</option>
+                            <option value="Datuk">Datuk</option>
+                            <option value="Nenek">Nenek</option>
+                            <option value="Cucu">Cucu</option>
                             <option value="Anak">Anak</option>
+                            <option value="Adik Beradik">Adik Beradik</option>
                             <option value="Anak Tiri">Anak Tiri</option>    
                             <option value="Anak Angkat">Anak Angkat</option>
                             <option value="Anak Saudara">Anak Saudara</option>
@@ -123,12 +133,14 @@ $count2=1;
                             <option value="Isteri 2">Isteri 2</option>
                             <option value="Isteri 3">Isteri 3</option>
                             <option value="Isteri 4">Isteri 4</option>
+                            <option value="Lain - lain">Lain - lain</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status </label>
                         <select name="status" class="form-control" id="status" required>
                             <option value="" selected disabled>Sila Pilih</option>
+                            <option value="Masih kecil">Masih kecil</option>   
                             <option value="Sekolah">Sekolah</option>   
                             <option value="IPTA/S">IPTA/S</option>
                             <option value="Bekerja">Bekerja</option>
@@ -150,9 +162,17 @@ $count2=1;
                                 <option value="Sihat">Sihat</option>
                                 <option value="Sakit">Sakit</option>
                                 <option value="OKU">OKU</option>
+                                <option value="Terlantar">Terlantar</option>
                             </select>
                     </div>
 
+                    <div class="mb-3">
+                        <label for="serumah" class="form-label">Tinggal Bersama/Tidak</label>
+                        <select name="serumah" id="serumah" class="form-control">
+                            <option value="Tinggal bersama">Tinggal bersama</option>
+                            <option value="Tinggal berasingan">Tinggal berasingan</option>
+                        </select>
+                    </div>
                     <div class="mb-3">
                         <label for="kerja" class="form-label">Pekerjaan / Tahap Pendidikan</label>
                         <input type="text" class="form-control" id="kerja" name="kerja">
@@ -172,4 +192,35 @@ $count2=1;
     </div>
 </div>
 </body>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const icInput = document.getElementById('icInput');
+    const ageOutput = document.getElementById('ageOutput');
+
+    icInput.addEventListener('input', function () {
+        const icValue = icInput.value;
+
+        if (icValue.length >= 6) {
+            const birthDate = icValue.substring(0, 6); // Extract YYMMDD
+            const year = parseInt(birthDate.substring(0, 2));
+            const month = parseInt(birthDate.substring(2, 4)) - 1; // JavaScript months are 0-based
+            const day = parseInt(birthDate.substring(4, 6));
+
+            const fullYear = year > 40 ? 1900 + year : 2000 + year; // Assume 1900s for >50, 2000s otherwise
+            const birthDateObj = new Date(fullYear, month, day);
+
+            const today = new Date();
+            let age = today.getFullYear() - birthDateObj.getFullYear();
+            const m = today.getMonth() - birthDateObj.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDateObj.getDate())) {
+                age--;
+            }
+
+            ageOutput.value = age;
+        } else {
+            ageOutput.value = ''; // Clear age if IC is not valid
+        }
+    });
+});
+    </script>
 </html>

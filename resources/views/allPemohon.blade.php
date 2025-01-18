@@ -1,6 +1,5 @@
 @include('header')
 <header>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <style>
         table {
             font-size: 14px;
@@ -11,11 +10,11 @@
 <body>
     <main class="main">
     <br>
-    <form action="{{ route('pemohon.display')}}" method="GET">
+    {{-- <form action="{{ route('pemohon.display')}}" method="GET">
     <center><input type="text" name="nama" id="nama" placeholder="Nama Pemohon">
     <input type="submit" value="Cari" class="btn btn-info" style="padding-top:3px; padding-bottom:3px; margin:0"></center>
     </form>
-    <br><br>
+    <br><br> --}}
     @if(session('success'))
     <div class="alert alert-success">
         {{ session('success') }}
@@ -27,14 +26,13 @@
             </div>
             @endif
     @if(isset($pemohon) && count($pemohon) > 0)
-    <table class="table table-hover">
+    <table id="pemohonTable" class="table table-hover">
         <thead style="text-transform:uppercase; background-color:#f2f2f2">
             <tr>
                 <th>No.</th>
                 <th>Nama</th>
+                <th>Pasangan</th>
                 <th>No. Kad Pengenalan</th>
-                <th>Jantina</th>
-                <th>Tarikh Lahir</th>
                 <th>Status Perkahwinan</th>
                 <th>&nbsp;</th>
             </tr>
@@ -47,9 +45,8 @@
             <tr>
                 <td>{{ $count++ }} </td>
                 <td><a href="{{ route('pemohon.details', ['id' => $pemohons->id])}}">{{ $pemohons->nama}}</a></td>
+                <td>{{$pemohons->pasangan->nama ?? 'N/A'}} </td>
                 <td>{{ $pemohons->ic}} </td>
-                <td>{{ $pemohons->jantina}} </td> 
-                <td>{{ $pemohons->tarikh_lahir}} </td>
                 <td>{{ $pemohons->status}} </td>
                 <td><form action="{{ route('pemohon.delete', ['id' => $pemohons->id]) }}" method="POST" id="deleteForm_{{ $pemohons->id }}">
                     @csrf
@@ -73,6 +70,14 @@
                 document.getElementById('deleteForm_' + id).submit();
             }
         }
+
+    $(document).ready(function () {
+        $('#pemohonTable').DataTable({
+            search: true,
+            paging: true,
+            info: true
+        });
+    });
     </script>
 </body>
 

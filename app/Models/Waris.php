@@ -23,6 +23,7 @@ class Waris extends Model
         'fizikal',
         'mental',
         'pendapatan',
+        'serumah'
     ];
 
     public function pemohon()

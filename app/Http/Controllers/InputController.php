@@ -63,8 +63,8 @@ class InputController extends Controller
         Perbelanjaan::create(['maklumat_pemohon_id' => $pemohon->id]);
         Harta::create(['maklumat_pemohon_id' => $pemohon->id]);
         SejarahBantuan::create(['maklumat_pemohon_id' => $pemohon->id]);
-        HadTanggungan::create(['maklumat_pemohon_id' => $pemohon->id]);
-        HadPenambahan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        // HadTanggungan::create(['maklumat_pemohon_id' => $pemohon->id]);
+        HadPenambahan::create(['maklumat_pemohon_id' => $pemohon->id]); 
         HadPenolakan::create(['maklumat_pemohon_id' => $pemohon->id]);
         JumlahKifayah::create(['maklumat_pemohon_id' => $pemohon->id]);
     
@@ -170,6 +170,7 @@ class InputController extends Controller
             'status' => 'required|string',
             'kerja' => 'required|string',
             'fizikal' => 'nullable|string',
+            'serumah' => 'nullable|string',
             'mental' => 'nullable|in:Waras,Tidak Waras',
             'pendapatan' => 'required|numeric|min:0',
         ]);

@@ -42,21 +42,39 @@ class InputController extends Controller
 
         $pemohon = MaklumatPemohon::create($validatedData);
 
-        $excludedStatuses = [
-            'Bujang',
-            'Duda(Kematian Isteri)',
-            'Duda(Bercerai)',
-            'Janda(Kematian Suami)',
-            'Janda(Bercerai)',
-        ];
-    
-        // Only create MaklumatPasangan if the status is not excluded
-        if (!in_array($validatedData['status'], $excludedStatuses)) {
-            MaklumatPasangan::create([
+        if (in_array($validatedData['bandar'], ['JOHOR BAHRU', 'BATU PAHAT'])) {
+            HadTanggungan::create([
                 'maklumat_pemohon_id' => $pemohon->id,
-                // Add other default values if required
+                'butiran_tanggungan' => 'Ketua Keluarga - Bandar',
+                'jumlah_tanggungan' => 665,
+            ]);
+        } else {
+            HadTanggungan::create([
+                'maklumat_pemohon_id' => $pemohon->id,
+                'butiran_tanggungan' => 'Ketua Keluarga - Luar Bandar',
+                'jumlah_tanggungan' => 615,
             ]);
         }
+        // $excludedStatuses = [
+        //     'Bujang',
+        //     'Duda(Kematian Isteri)',
+        //     'Duda(Bercerai)',
+        //     'Janda(Kematian Suami)',
+        //     'Janda(Bercerai)',
+        // ];
+    
+        // // Only create MaklumatPasangan if the status is not excluded
+        // if (!in_array($validatedData['status'], $excludedStatuses)) {
+        //     MaklumatPasangan::create([
+        //         'maklumat_pemohon_id' => $pemohon->id,
+        //         // Add other default values if required
+        //     ]);
+        //     HadTanggungan::create([
+        //         'maklumat_pemohon_id' => $pemohon->id,
+        //         'butiran_tanggungan' => 'Pasangan',
+        //         'jumlah_tanggungan' => 210,
+        //     ]);
+        // }
     
         // Create related records for other models
         Pendapatan::create(['maklumat_pemohon_id' => $pemohon->id]);
@@ -67,7 +85,7 @@ class InputController extends Controller
         HadPenambahan::create(['maklumat_pemohon_id' => $pemohon->id]); 
         HadPenolakan::create(['maklumat_pemohon_id' => $pemohon->id]);
         JumlahKifayah::create(['maklumat_pemohon_id' => $pemohon->id]);
-    
+        
         // Set a success message
         $request->session()->flash('success', 'Data and related records inserted successfully');
     
@@ -101,6 +119,12 @@ class InputController extends Controller
         $dataPasangan->maklumat_pemohon_id = $pemohonId;
         
         $dataPasangan->save();
+
+        HadTanggungan::create([
+                'maklumat_pemohon_id' => $pemohonId,
+                'butiran_tanggungan' => 'Pasangan',
+                'jumlah_tanggungan' => 210,
+            ]);
 
         return redirect()->back()->with('success', 'Maklumat Pasangan berjaya ditambah!');
     }
@@ -184,6 +208,42 @@ class InputController extends Controller
     
         // Save the model to the database
         $waris->save();
+
+        $butiranTanggungan = null;
+        $jumlahTanggungan = 0;
+    
+        if (in_array($waris->hubungan, ['Isteri 1', 'Isteri 2', 'Isteri 3', 'Isteri 4'])) {
+            $butiranTanggungan = 'Pasangan';
+            $jumlahTanggungan = 210;
+        } elseif ($waris->status === 'Sekolah' && $waris->umur > 12) {
+            $butiranTanggungan = 'Anak Sekolah Menengah 13 - 17 Tahun';
+            $jumlahTanggungan = 260;
+        } elseif ($waris->status === 'Sekolah' && $waris->umur > 6 && $waris->umur <= 12) {
+            $butiranTanggungan = 'Anak Sekolah Rendah 7 - 12 Tahun';
+            $jumlahTanggungan = 210;
+        } elseif (in_array($waris->status, ['Sekolah', 'Tidak bersekolah']) && $waris->umur <= 6) {
+            $butiranTanggungan = 'Anak 6 Tahun ke Bawah';
+            $jumlahTanggungan = 170;
+        } elseif ($waris->status === 'IPTA/S') {
+            $butiranTanggungan = 'Anak Menuntut di IPTA/S';
+            $jumlahTanggungan = 150;
+        } elseif ($waris->status === 'Tidak sekolah' && $waris->umur >= 6 && $waris->umur <= 17) {
+            $butiranTanggungan = 'Anak Tidak Bersekolah (Bawah 17 Tahun)';
+            $jumlahTanggungan = 110;
+        } elseif ($waris->umur > 17) {
+            $butiranTanggungan = 'Dewasa (18 tahun ke atas/tidak bekerja)';
+            $jumlahTanggungan = 210;
+        }
+    
+        // If conditions are met, create a new HadTanggungan entry
+        if ($butiranTanggungan) {
+            $hadTanggungan = new HadTanggungan();
+            $hadTanggungan->maklumat_pemohon_id = $pemohonId;
+            $hadTanggungan->butiran_tanggungan = $butiranTanggungan;
+            $hadTanggungan->jumlah_tanggungan = $jumlahTanggungan;
+            $hadTanggungan->save();
+        }
+    
 
     // Pass the pemohonId and allWarisData to the view
     return redirect()->back()->with('success', 'Maklumat Waris dan Tanggungan berjaya ditambah!');

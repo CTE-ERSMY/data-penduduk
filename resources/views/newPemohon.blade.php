@@ -54,13 +54,9 @@
               </tr><tr>
                   <th rowspan="2">Alamat</th>
                   <td rowspan="2">
-                      <input type="text" name="alamat" class="form-control" size="50" required><br>
-                      <select name="poskod" id="poskod" class="form-control" required>
-                          <option selected value="81900">81900</option>
-                      </select><br>
-                      <select name="bandar" id="bandar" class="form-control">
-                          <option selected value="Kota Tinggi">Kota Tinggi</option>
-                      </select>
+                      <input type="text" name="alamat" placeholder="alamat" class="form-control" style="text-transform: uppercase;" size="50" required><br>
+                      <input type="text" name="poskod" placeholder="poskod" id="poskod" style="text-transform: uppercase;" class="form-control" required><br>
+                      <input type="text" name="bandar" placeholder="bandar" id="bandar" style="text-transform: uppercase;" class="form-control" required>
                   </td>
                   <th>No. Tel 1</th>
                   <td><input type="text" name="nombor_rumah" placeholder="tanpa (-)" id="nombor_rumah" class="form-control"></td>
@@ -113,6 +109,13 @@
             document.getElementById('jantina').value = '';
         }
     });
+
+    document.addEventListener('input', function (event) {
+        if (event.target.matches('#alamat, #poskod, #bandar')) {
+            event.target.value = event.target.value.toUpperCase();
+        }
+    });
+
     </script>
     @endpush    
     

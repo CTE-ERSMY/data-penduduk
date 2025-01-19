@@ -57,13 +57,9 @@
             </tr><tr>
                 <th rowspan="2">Alamat</th>
                 <td rowspan="2">
-                    <input type="text" name="alamat" class="form-control" value="{{ old('alamat', $pemohon->alamat) }}" size="50" required><br>
-                    <select name="poskod" id="poskod" class="form-control" required>
-                        <option selected value="81900" {{ old('poskod', $pemohon->poskod) == '81900' ? 'selected' : '' }}>81900</option>
-                    </select><br>
-                    <select name="bandar" id="bandar" class="form-control">
-                        <option selected value="Kota Tinggi" {{ old('bandar', $pemohon->bandar) == 'Kota Tinggi' ? 'selected' : '' }}>Kota Tinggi</option>
-                    </select>
+                    <input type="text" name="alamat" class="form-control" value="{{ old('alamat', $pemohon->alamat) }}" style="text-transform: uppercase;" size="50" required><br>
+                    <input type="text" name="poskod" id="poskod" value="{{ old('poskod', $pemohon->poskod) }}" style="text-transform: uppercase;" class="form-control" required><br>
+                    <input type="text" name="bandar" id="bandar" value="{{ old('bandar', $pemohon->bandar) }}" style="text-transform: uppercase;" class="form-control" required>
                 </td>
                 <th>No. Telefon Rumah</th>
                 <td><input type="text" name="nombor_rumah" id="nombor_rumah" class="form-control" value="{{ old('nombor_rumah', $pemohon->nombor_rumah) }}"></td>
@@ -88,3 +84,10 @@
 </div>
 </main>
 </body>
+<script>
+    document.addEventListener('input', function (event) {
+        if (event.target.matches('#alamat, #poskod, #bandar')) {
+            event.target.value = event.target.value.toUpperCase();
+        }
+    });
+</script>

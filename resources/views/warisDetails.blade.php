@@ -1,5 +1,16 @@
 @include('header2')  
 <br>
+@if(session('success'))
+<div class="alert alert-success">
+    {{ session('success') }}
+    </div>
+    @endif
+@if(session('error'))
+    <div class="alert alert-success">
+        {{ session('error') }}
+        </div>
+        @endif
+<br>
 <button class="btn btn-primary" style="width:fit-content" data-bs-toggle="modal" data-bs-target="#addWarisModal">+ Waris dan Tanggungan</button><br><br>
 <h5>MAKLUMAT TANGGUNGAN</h5>
 @if ($waris->isNotEmpty())
@@ -142,6 +153,7 @@ $count2=1;
                             <option value="" selected disabled>Sila Pilih</option>
                             <option value="Masih kecil">Masih kecil</option>   
                             <option value="Sekolah">Sekolah</option>   
+                            <option value="Tidak sekolah">Tidak sekolah</option>   
                             <option value="IPTA/S">IPTA/S</option>
                             <option value="Bekerja">Bekerja</option>
                             <option value="Tidak Bekerja">Tidak Bekerja</option>

@@ -160,9 +160,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="alamat" class="form-label">Alamat</label>
-                        <textarea class="form-control" id="alamat" name="alamat" rows="3"></textarea>
-                        <label for="Bandar" class="form-label">Bandar</label>
-                        <input type="text" name="Bandar" id="Bandar" class="form-control">
+                        <textarea class="form-control" id="alamat" name="alamat" rows="3" required></textarea>
+                        <label for="poskod" class="form-label">Poskod</label>
+                        <input type="text" name="poskod" id="poskod" class="form-control" required>
+                        <label for="bandar" class="form-label">Bandar</label>
+                        <input type="text" name="bandar" id="bandar" class="form-control" required>
                     </div>
                     <div class="mb-3">
                         <label for="nombor_rumah" class="form-label">No Tel 1</label>
@@ -207,7 +209,7 @@
             }
     
             // Determine gender
-            const gender = parseInt(genderDigit) % 2 === 0 ? 'Lelaki' : 'Wanita';
+            const gender = parseInt(genderDigit) % 2 === 0 ? 'Perempuan' : 'Lelaki';
             document.getElementById('jantina').value = gender;
         } else {
             // Clear fields if IC number is incomplete or invalid

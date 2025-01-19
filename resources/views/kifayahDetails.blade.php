@@ -19,12 +19,12 @@
         <td>Nama</td>
         <td>{{ $pemohon->nama }}</td>
         <td>Pendapatan Pemohon (RM)</td>
-        <td>{{ $pendapatan->gaji}} </td>
+        <td>{{ $pendapatan->gaji ?? 'N/A'}} </td>
     </tr><tr>
         <td>No. Kad Pengenalan</td>
         <td>{{ $pemohon->ic }}</td>
         <td>Pendapatan Pasangan (RM)</td>
-        <td>{{ $pendapatan->gaji_psgn }} </td>
+        <td>{{ $pendapatan->gaji_psgn ?? 'N/A'}} </td>
     </tr><tr>
         <td>Bilangan Tanggungan</td>
         <td>{{ $bilTanggungan}} </td>

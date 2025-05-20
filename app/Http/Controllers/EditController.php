@@ -62,7 +62,7 @@ class EditController extends Controller
     $validatedData = $request->validate([
         'nama' => 'required|string',
         'ic' => 'required|numeric|digits:12|unique:maklumat_pemohon,ic,'.$id,
-        'jantina' => 'required|in:Lelaki,Wanita',
+        'jantina' => 'required|in:Lelaki,Perempuan',
         'tarikh_lahir' => 'required|date',
         'status' => 'required|string',
         'mental' => 'required|in:Waras,Tidak Waras',
@@ -105,7 +105,7 @@ class EditController extends Controller
         $validatedData = $request->validate([
             'nama' => 'required|string',
             'ic' => 'required',
-            'jantina' => 'required|in:Lelaki,Wanita',
+            'jantina' => 'required|in:Lelaki,Perempuan',
             'tarikh_lahir' => 'required|date',
             'status' => 'nullable|string',
             'mental' => 'nullable|in:Waras,Tidak Waras',

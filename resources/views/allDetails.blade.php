@@ -602,7 +602,7 @@ $count2=1;
         </tr>
     </table>
 
-    @if ($sejarahBantuan)
+
 <h5>SEJARAH BANTUAN</h5>
 <table class="table table-striped">
     <thead>
@@ -618,21 +618,25 @@ $count2=1;
         </tr>
     </thead>
     <tbody>
+        @forelse($sejarahBantuan as $bantuan)
         <tr>
-            <td>{{ $sejarahBantuan->nama_bantuan }}<br><a href="{{ asset($sejarahBantuan->file_path) }}" target="_blank">{{ $sejarahBantuan->file_name }}</a></td>
-            <td>{{ $sejarahBantuan->no_akaun }}</td>
-            <td>{{ $sejarahBantuan->tarikh_mohon }}</td>
-            <td>{{ $sejarahBantuan->tarikh_lulus }}</td>
-            <td>{{ $sejarahBantuan->tarikh_mula }}</td>
-            <td>{{ $sejarahBantuan->jumlah_lulus }}</td>
-            <td>{{ $sejarahBantuan->status_bantuan }}</td>
-            <td>{{ $sejarahBantuan->catatan }}</td>
+            <td>{{ $bantuan->nama_bantuan ?? 'N/A' }}<br><a href="{{ asset($bantuan->file_path) ?? 'N/A' }}" target="_blank">{{ $bantuan->file_name ?? 'N/A' }}</a></td>
+            <td>{{ $bantuan->no_akaun ?? 'N/A' }}</td>
+            <td>{{ $bantuan->tarikh_mohon ?? 'N/A' }}</td>
+            <td>{{ $bantuan->tarikh_lulus ?? 'N/A' }}</td>
+            <td>{{ $bantuan->tarikh_mula ?? 'N/A' }}</td>
+            <td>{{ $bantuan->jumlah_lulus ?? 'N/A' }}</td>
+            <td>{{ $bantuan->status_bantuan ?? 'N/A' }}</td>
+            <td>{{ $bantuan->catatan ?? 'N/A' }}</td>
         </tr>
+        @empty
+            <tr>
+                <td colspan="8">Tiada sejarah bantuan.</td>
+            </tr>
+        @endforelse
     </tbody>
 </table>
-@else
-<p>Tiada Maklumat Sejarah Bantuan</p>
-@endif    
+
 <center><h4><a href="{{ route('pemohon.details', ['id' => $pemohon->id]) }}">Kembali</h4></center>
 <script src="{{asset('js/main.js')}}"></script>
 

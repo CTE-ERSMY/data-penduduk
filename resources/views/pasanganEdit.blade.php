@@ -17,7 +17,7 @@
                 <td><select class="form-control" name="jantina" id="jantina" required>
                         <option selected disabled>Pilih Jantina</option>
                         <option value="Lelaki" {{ old('jantina', $pasangan->jantina) == 'Lelaki' ? 'selected' : '' }}>Lelaki</option>
-                        <option value="Wanita" {{ old('jantina', $pasangan->jantina) == 'Wanita' ? 'selected' : '' }}>Wanita</option>
+                        <option value="Perempuan" {{ old('jantina', $pasangan->jantina) == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
                     </select></td>
                 <th>Tarikh Lahir</th>
                 <td><input class="form-control" type="date" name="tarikh_lahir" id="tarikh_lahir" value="{{ old('tarikh_lahir', $pasangan->tarikh_lahir ? \Carbon\Carbon::parse($pasangan->tarikh_lahir)->format('Y-m-d') : '') }}" required>

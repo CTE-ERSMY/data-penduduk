@@ -27,7 +27,7 @@ Built CRUD based system for village chiefs to manage resident data, replacing pa
 > Clone the repo and set it up locally
 
 ```bash
-git clone https://github.com/yourusername/project-name.git
+git clone https://github.com/CTE-ERSMY/data-penduduk.git
 cd project-name
 composer install
 cp .env.example .env
